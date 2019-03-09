@@ -24,18 +24,19 @@ class Features extends Component {
       );
     });
     return (
-      <div class="features">
-        <div class="featuresHeading">
-          <Header as="h1" textAlign="center">
-            Featured
-          </Header>
-          <Header as="h2" textAlign="left">
-            Explore <a>{this.state.featured_causes.length} </a>
-            causes
-          </Header>
+      <div>
+        <div class="features">
+          <div class="featuresHeading">
+            <Header as="h1" textAlign="center">
+              Featured
+            </Header>
+            <Header as="h2" textAlign="left">
+              Explore <a>{this.state.featured_causes.length} </a>
+              causes
+            </Header>
+          </div>
+          <Card.Group itemsPerRow={4}>{features}</Card.Group>
         </div>
-
-        <Card.Group itemsPerRow={4}>{features}</Card.Group>
       </div>
     );
   }

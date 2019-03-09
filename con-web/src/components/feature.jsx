@@ -20,7 +20,7 @@ class Feature extends Component {
           <Card.Meta>
             <span className="date">
               by{" "}
-              <a href="https://www.wwf.org.uk">
+              <a href="http://localhost:3000/Project">
                 <strong>
                   <em>{title}</em>
                 </strong>

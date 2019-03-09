@@ -14,16 +14,16 @@ class Test extends Component {
   }
 
   render() {
-    let citations = this.state.citations.map(item => <h1>yp</h1>);
-    console.log(citations);
+    // let citations = this.state.citations.map(item => <h1>{item.name}</h1>);
+    // console.log(citations);
 
-    console.log(this.state);
+    // console.log(this.state);
     //returns result as an array '[{…}]
     // 0: {citation: "Blanc, J. 2008. Loxodonta africana. The IUCN Red L…LTS.T12392A3339343.en .Downloaded on 5 March 2019"}
     // length: 1
     // __proto__: Array(0)
 
-    return <div>{citations}</div>;
+    return <div>citations</div>;
   }
 }
 

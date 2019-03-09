@@ -25,5 +25,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "react-facebook-login": "^4.1.1",
+    "react-google-login": "^5.0.2"
+  }
 }

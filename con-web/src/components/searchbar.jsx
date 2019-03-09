@@ -10,7 +10,7 @@ const source = _.times(5, () => ({
   price: faker.finance.amount(0, 100, 2, "$")
 }));
 
-export default class SearchExampleStandard extends Component {
+export default class SearchBar extends Component {
   componentWillMount() {
     this.resetComponent();
   }
@@ -44,6 +44,7 @@ export default class SearchExampleStandard extends Component {
       <Grid>
         <Grid.Column width={6}>
           <Search
+            fluid
             loading={isLoading}
             onResultSelect={this.handleResultSelect}
             onSearchChange={_.debounce(this.handleSearchChange, 500, {
