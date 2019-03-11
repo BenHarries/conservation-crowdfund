@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Image, Card, Icon, Button, Progress } from "semantic-ui-react";
+import "./feature.css";
 
 class Feature extends Component {
   state = { percent: 33 };
@@ -10,13 +11,18 @@ class Feature extends Component {
     });
 
   render() {
+    console.log(this.props);
     const { title } = this.props;
     const { image } = this.props;
+    const { category } = this.props;
+    console.log("cat", category);
     return (
       <Card>
         <Image src={image} />
+
         <Card.Content>
-          <Card.Header>{title}</Card.Header>
+          <div class="category">{category}</div>{" "}
+          <Card.Header>{title}</Card.Header>{" "}
           <Card.Meta>
             <span className="date">
               by{" "}

@@ -45,7 +45,7 @@ class Project extends Component {
               </div>{" "}
             </Grid.Column>
             <Grid.Column width={4}>
-              <Segment>
+              <Segment color="olive">
                 About:
                 <p class="middle">
                   Turtles are diapsids of the order Testudines (or Chelonii)
@@ -64,7 +64,7 @@ class Project extends Component {
               <Segment>2</Segment>
             </Grid.Column>
             <Grid.Column width={4}>
-              <Segment>
+              <Segment color="red">
                 <Reveal animated="move left">
                   <Reveal.Content visible>
                     <div class="visible">
@@ -96,7 +96,7 @@ class Project extends Component {
                   </Reveal.Content>
                 </Reveal>
               </Segment>
-              <Segment>
+              <Segment color="red">
                 <Reveal animated="move left">
                   <Reveal.Content visible>
                     <div class="visible">
@@ -129,8 +129,8 @@ class Project extends Component {
                   </Reveal.Content>
                 </Reveal>
               </Segment>
-              <Segment>
-                <Reveal animated="move left">
+              <Segment color="red">
+                <Reveal animated="move left" color="red">
                   <Reveal.Content visible>
                     <div class="visible">
                       <p align="center">Pledge £30 or more</p>
