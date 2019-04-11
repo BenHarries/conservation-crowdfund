@@ -12,12 +12,12 @@ class Feature extends Component {
 
   render() {
     console.log(this.props);
+    const { key } = this.props;
     const { title } = this.props;
     const { image } = this.props;
     const { category } = this.props;
-    console.log("cat", category);
     return (
-      <Card>
+      <Card id={key}>
         <Image src={image} />
 
         <Card.Content>

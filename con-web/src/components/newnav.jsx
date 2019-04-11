@@ -123,7 +123,6 @@ export default class NavBar extends Component {
 
         <Grid.Column width={14} floated="right">
           <Segment>
-            {this.state.pictures}
             <Placeholder />
           </Segment>
         </Grid.Column>

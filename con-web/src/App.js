@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import "semantic-ui-css/semantic.min.css";
-
-import GridExampleCelledInternally from "./components/landing";
-import NavBar from "./components/navbar";
-import Features from "./components/features";
-import "./App.css";
-import StickyExampleActive from "./components/sticky";
+import NavBar from "./components/newnav";
+import Login from "./components/login";
+import NewFeature from "./components/test_send";
+// import NavBar from "./components/newnav";
 
 class App extends Component {
   render() {
-    return <React.Fragment>{/* <NavBar /> */}</React.Fragment>;
+    return (
+      <React.Fragment>
+        <NewFeature />
+        <NavBar />
+      </React.Fragment>
+    );
   }
 }
 

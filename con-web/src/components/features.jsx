@@ -15,6 +15,14 @@ class Features extends Component {
     fetch("/featured_causes")
       .then(res => res.json())
       .then(featured_causes => this.setState({ featured_causes }));
+    // Now I have to work out how the cause once clicked on will be moved
+    // the projects page loading data from the correct element in the array
+    // featured causes as its:
+    // funding level
+    // endangered category
+    // its intro
+    // its rewards
+    // its youtube video            WILL THIS BE A GET REQUEST
     fetch(API)
       .then(result => {
         if (result.ok) {
@@ -32,7 +40,6 @@ class Features extends Component {
           );
         });
         this.setState({ category: category });
-        console.log("statey", this.state.category);
       });
   }
   render() {
