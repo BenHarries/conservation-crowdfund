@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Image, Card, Icon, Button, Progress } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
 import "./feature.css";
 
 class Feature extends Component {
@@ -11,11 +12,13 @@ class Feature extends Component {
     });
 
   render() {
-    console.log(this.props);
     const { key } = this.props;
     const { title } = this.props;
     const { image } = this.props;
     const { category } = this.props;
+    const slash = "/";
+    const Linker = slash.concat(title);
+    console.log(Linker);
     return (
       <Card id={key}>
         <Image src={image} />
@@ -26,11 +29,11 @@ class Feature extends Component {
           <Card.Meta>
             <span className="date">
               by{" "}
-              <a href="http://localhost:3000/Project">
+              <NavLink to={Linker}>
                 <strong>
                   <em>{title}</em>
                 </strong>
-              </a>
+              </NavLink>
             </span>
           </Card.Meta>
           Allows maping turtle nests and increses chance...

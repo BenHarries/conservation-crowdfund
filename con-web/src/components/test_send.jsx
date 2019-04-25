@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form } from "semantic-ui-react";
+
 export default class NewFeature extends Component {
   constructor() {
     super();
@@ -9,7 +10,6 @@ export default class NewFeature extends Component {
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
-
   handleSubmit = event => {
     event.preventDefault();
 
@@ -40,30 +40,32 @@ export default class NewFeature extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <Form.Input
-          width={6}
-          type="text"
-          name="id"
-          placeholder="id"
-          onChange={this.handleChange}
-        />
-        <Form.Input
-          width={6}
-          type="text"
-          name="species"
-          placeholder="species"
-          onChange={this.handleChange}
-        />
-        <Form.Input
-          width={6}
-          type="text"
-          name="image"
-          placeholder="image"
-          onChange={this.handleChange}
-        />
-        <Button type="submit">Submit</Button>{" "}
-      </Form>
+      <div>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Input
+            width={6}
+            type="text"
+            name="id"
+            placeholder="id"
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            width={6}
+            type="text"
+            name="species"
+            placeholder="species"
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            width={6}
+            type="text"
+            name="image"
+            placeholder="image"
+            onChange={this.handleChange}
+          />
+          <Button type="submit">Submit</Button>{" "}
+        </Form>
+      </div>
     );
   }
 }

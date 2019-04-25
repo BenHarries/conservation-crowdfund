@@ -10,7 +10,7 @@ import {
 } from "semantic-ui-react";
 import "./project.css";
 
-class Project extends Component {
+class Turtle extends Component {
   state = { percent: 80 };
   render() {
     return (
@@ -171,4 +171,4 @@ class Project extends Component {
   }
 }
 
-export default Project;
+export default Turtle;

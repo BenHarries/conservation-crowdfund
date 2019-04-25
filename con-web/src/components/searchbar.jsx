@@ -1,25 +1,32 @@
 import _ from "lodash";
-import faker from "faker";
 import React, { Component } from "react";
 import { Search, Grid, Header, Segment } from "semantic-ui-react";
 
 const source = _.times(5, () => ({
-  title: faker.company.companyName(),
-  description: faker.company.catchPhrase(),
-  image: faker.internet.avatar(),
-  price: faker.finance.amount(0, 100, 2, "$")
+  // title: faker.company.companyName(),
+  // description: faker.company.catchPhrase(),
+  // image: faker.internet.avatar(),
+  // price: faker.finance.amount(0, 100, 2, "$")
 }));
 
 export default class SearchBar extends Component {
+  state = {
+    featured_causes: []
+  };
+  componentDidMount() {
+    fetch("/featured_causes")
+      .then(res => res.json())
+      .then(featured_causes => this.setState({ featured_causes }));
+  }
   componentWillMount() {
     this.resetComponent();
   }
-
   resetComponent = () =>
     this.setState({ isLoading: false, results: [], value: "" });
 
   handleResultSelect = (e, { result }) =>
-    this.setState({ value: result.title });
+    this.setState({ value: result.species });
+  // this.setState({ value: result.title });
 
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value });
@@ -28,17 +35,25 @@ export default class SearchBar extends Component {
       if (this.state.value.length < 1) return this.resetComponent();
 
       const re = new RegExp(_.escapeRegExp(this.state.value), "i");
-      const isMatch = result => re.test(result.title);
+      const isMatch = result => re.test(result.species);
 
       this.setState({
         isLoading: false,
-        results: _.filter(source, isMatch)
+        results: _.filter(this.state.featured_causes, isMatch)
       });
     }, 300);
   };
 
   render() {
-    const { isLoading, value, results } = this.state;
+    let { isLoading, value, results } = this.state;
+    // var obj = JSON.parse(results);
+    // console.log("aaaaa", obj);
+
+    // obj.title = obj.species;
+    // delete obj.species;
+
+    // results = JSON.stringify([obj]);
+    // console.log("state of search", this.state);
 
     return (
       <Grid>

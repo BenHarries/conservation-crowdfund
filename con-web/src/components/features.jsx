@@ -53,6 +53,7 @@ class Features extends Component {
         />
       );
     });
+
     return (
       <div>
         <div class="features">

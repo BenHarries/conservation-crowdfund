@@ -1,91 +1,80 @@
 import React, { Component } from "react";
-import { Grid, Image, Card, Icon } from "semantic-ui-react";
+import { Grid, Image, Card, Form, Button } from "semantic-ui-react";
 // const GridExampleCelledInternally = () => (
 import "./landing.css";
+import Feature from "./feature";
 
 class MyCauses extends Component {
-  state = { users: [] };
+  state = { users: [], featured_causes: [], user: [] };
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const url = "/users/" + this.state.id;
+    console.log("sending", url);
+
+    fetch(url)
+      .then(result => {
+        if (result.ok) {
+          return result.json();
+        } else {
+          throw new Error("There is no user with this name");
+        }
+      })
+      .then(user => this.setState({ user: user }));
+
+    console.log(this.state);
+
+    // fetch(url, {
+    //   method: "POST", // or ‘PUT’
+
+    //   body: JSON.stringify(data), // data can be `string` or {object}!
+    //   headers: { "Content-Type": "application/json" }
+    // })
+    //   .then(res => res.text())
+    //   .then(res => console.log("Success:", res))
+
+    //   .catch(error => console.error("Error:", error));
+  };
   componentDidMount() {
     fetch("/users")
       .then(res => res.json())
       .then(users => this.setState({ users }));
+    fetch("/featured_causes")
+      .then(res => res.json())
+      .then(featured_causes => this.setState({ featured_causes }));
   }
 
   render() {
+    var users_info = this.state.users;
+    let result = users_info.map(a => a.causes);
+    var all_causes = this.state.featured_causes;
+    var user_causes = all_causes.filter(featured_cause => {
+      return featured_cause.species == result;
+    });
+    console.log("gggg", all_causes);
+    console.log("STATE", this.state);
+
+    let features = user_causes.map(featured_cause => {
+      return (
+        <Feature
+          key={featured_cause.id}
+          title={featured_cause.species}
+          image={featured_cause.image}
+        />
+      );
+    });
+    console.log("yyyy", features);
+
     return (
       <div class="grid">
         <Grid celled="internally">
           <Grid.Row>
-            <Grid.Column width={3}>
-              <Card>
-                <Image src="http://savepangolins.org/wp-content/themes/SavePangolins/images/pangolin-new.png" />
-                <Card.Content>
-                  <Card.Header>Save Pangolins</Card.Header>
-                  <Card.Meta>
-                    <span className="date">Donating since 2014</span>
-                  </Card.Meta>
-                  <Card.Description />
-                </Card.Content>
-                <Card.Content extra>
-                  <a>
-                    <Icon name="pound sign" />
-                    20.00 donated
-                  </a>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
-            <Grid.Column width={10}>
-              <div align="left">
-                <h3 style={{ fontWeight: "bold" }}>
-                  <ul>
-                    <li>
-                      <h4 class="c">
-                        22<sup>nd</sup>
-                      </h4>
-                      <div class="b">
-                        <em>Mar</em>
-                      </div>
-
-                      <p>20 camera traps installed in Uluru reserve</p>
-                      <br />
-                    </li>
-
-                    <li>
-                      <h4 class="c">
-                        1<sup>st</sup>
-                      </h4>
-                      <div class="b">
-                        <em>Feb</em>
-                      </div>
-                      <p>Population risen by 4%</p>
-                      <br />
-                    </li>
-                  </ul>
-                </h3>
-              </div>
-            </Grid.Column>
-            <Grid.Column width={3}>
-              <Card>
-                <Image
-                  src="https://images.ecosia.org/IycRw2HnuHLRnlLffi9yvXAXlKY=/0x390/smart/http%3A%2F%2F1.bp.blogspot.com%2F-RBacQ_-gXRQ%2FUb6kW5vfbxI%2FAAAAAAAADOU%2FYJRkcef4-IM%2Fs1600%2FPangolin-Amazing-Animal.jpg"
-                  fluid
-                />
-                <Card.Content align="center">Endangered</Card.Content>
-              </Card>
-            </Grid.Column>
-          </Grid.Row>
-
-          <Grid.Row>
-            <Grid.Column width={3}>
-              <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
-            </Grid.Column>
-            <Grid.Column width={10}>
-              <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
-            </Grid.Column>
-            <Grid.Column width={3}>
-              <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
-            </Grid.Column>
+            Causes You have donated to
+            <Card.Group itemsPerRow={4}>{features}</Card.Group>
           </Grid.Row>
         </Grid>
       </div>
