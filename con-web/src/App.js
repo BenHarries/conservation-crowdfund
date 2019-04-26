@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Menu } from "semantic-ui-react";
 
 import NavBar from "./components/newnav";
-import SearchBar from "./components/searchbar";
 import MyCauses from "./components/landing";
 import Admin from "./components/admin";
 import Turtle from "./components/project";
+import Login from "./components/login";
+import { Redirect } from "react-router-dom";
 
 class App extends Component {
   state = { featured_causes: [] };
@@ -40,32 +41,14 @@ class App extends Component {
     // console.log("featured?", this.state);
   }
 
+  handleLogout() {
+    localStorage.removeItem("token");
+    console.log("remove token");
+  }
+
   render() {
     const { activeItem } = this.state;
-    const { users } = this.state;
 
-    let featured_causes = [
-      {
-        id: 1,
-        species: "Turtle",
-        image:
-          "http://2.bp.blogspot.com/-4dc4vkZLlGo/TWHh1qNIJSI/AAAAAAAAEfg/DBdScbOCEYE/s1600/vista-wallpaper-green-sea-turtle.jpg",
-        component: Turtle
-      },
-      {
-        id: 2,
-        species: "Giraffe",
-        image: "https://retrieverman.files.wordpress.com/2012/05/giraffe.jpg",
-        component: Turtle
-      },
-      {
-        id: 3,
-        species: "Mongoose",
-        image:
-          "https://www.marwell.org.uk/media/images/full/yellow_mongoose_shutterstock_296510669.jpg",
-        component: Turtle
-      }
-    ];
     return (
       <Router>
         <div>
@@ -79,7 +62,15 @@ class App extends Component {
                 Featured Causes
               </Menu.Item>
             </Link>
-
+            <Link to={"/mycauses"} className="nav-link">
+              <Menu.Item
+                name="upcomingEvents"
+                active={activeItem === "upcomingEvents"}
+                onClick={this.handleItemClick}
+              >
+                My Causes
+              </Menu.Item>
+            </Link>
             <Link to={"/admin"} className="nav-link">
               <Menu.Item
                 name="reviews"
@@ -89,17 +80,21 @@ class App extends Component {
                 Admin
               </Menu.Item>
             </Link>
-            <Link to={"/mycauses"} className="nav-link">
+
+            <Link to={"/login"} className="nav-link">
               <Menu.Item
-                name="upcomingEvents"
+                name="Login"
                 active={activeItem === "upcomingEvents"}
                 onClick={this.handleItemClick}
               >
                 {/* {users.map(user => (
                   <p key={user.id}>{user.username}'s Account</p>
                 ))}{" "} */}
-                My Causes
+                Login
               </Menu.Item>
+            </Link>
+            <Link to={"/login"} className="nav-link">
+              <Menu.Item onClick={this.handleLogout}>Logout</Menu.Item>
             </Link>
           </Menu>
 
@@ -108,6 +103,7 @@ class App extends Component {
             <Route exact path="/" component={NavBar} />
             <Route path="/admin" component={Admin} />
             <Route path="/mycauses" component={MyCauses} />
+            <Route path="/login" component={Login} />
 
             {/* {featured_causes.map(cause => {
               console.log("aaaaa", cause.species);

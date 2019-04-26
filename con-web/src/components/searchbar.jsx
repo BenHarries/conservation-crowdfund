@@ -56,33 +56,17 @@ export default class SearchBar extends Component {
     // console.log("state of search", this.state);
 
     return (
-      <Grid>
-        <Grid.Column width={6}>
-          <Search
-            fluid
-            loading={isLoading}
-            onResultSelect={this.handleResultSelect}
-            onSearchChange={_.debounce(this.handleSearchChange, 500, {
-              leading: true
-            })}
-            results={results}
-            value={value}
-            {...this.props}
-          />
-        </Grid.Column>
-        {/* <Grid.Column width={10}>
-          <Segment>
-            <Header>State</Header>
-            <pre style={{ overflowX: "auto" }}>
-              {JSON.stringify(this.state, null, 2)}
-            </pre>
-            <Header>Options</Header>
-            <pre style={{ overflowX: "auto" }}>
-              {JSON.stringify(source, null, 2)}
-            </pre>
-          </Segment>
-        </Grid.Column> */}
-      </Grid>
+      <Search
+        fluid
+        loading={isLoading}
+        onResultSelect={this.handleResultSelect}
+        onSearchChange={_.debounce(this.handleSearchChange, 500, {
+          leading: true
+        })}
+        results={results}
+        value={value}
+        {...this.props}
+      />
     );
   }
 }

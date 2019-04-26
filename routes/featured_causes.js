@@ -7,7 +7,7 @@ let featured_causes = [
     species: "Turtle",
     image:
       "http://2.bp.blogspot.com/-4dc4vkZLlGo/TWHh1qNIJSI/AAAAAAAAEfg/DBdScbOCEYE/s1600/vista-wallpaper-green-sea-turtle.jpg",
-    component: "Turtle"
+    secret: "Turtle"
   },
   {
     id: 2,

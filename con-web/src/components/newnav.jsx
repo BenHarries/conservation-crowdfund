@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Menu, Segment, Sticky } from "semantic-ui-react";
+import { Grid, Menu, Segment, Sticky, Header } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
@@ -93,55 +93,19 @@ export default class NavBar extends Component {
     //   return <p>Loading...</p>;
     // }
     return (
-      <Grid columns={3}>
-        {/* <Rail position="center"> */}
-        <Grid.Column width={2} floated="right" stretched>
-          <Sticky context={contextRef}>
-            <Menu fluid vertical tabular>
-              <NavLink activeClassName="active" to="/">
-                <Menu.Item
-                  name="Features"
-                  active={activeItem === "Features"}
-                  onClick={this.handleItemClick}
-                >
-                  <img
-                    alt="Logo"
-                    src="https://images.ecosia.org/Kyxly3BaoKw7eG2kWCRMSp75Zb4=/0x390/smart/https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fen%2Fthumb%2F8%2F8d%2FAgriculture%252C_Fisheries_and_Conservation_Department.svg%2F1200px-Agriculture%252C_Fisheries_and_Conservation_Department.svg.png"
-                  />
-                </Menu.Item>
-              </NavLink>
-              <Menu.Item
-                name="MyCauses"
-                active={activeItem === "MyCauses"}
-                onClick={this.handleItemClick}
-              >
-                {/* <NavLink activeClassName="active" to="/MyCauses"> */}
-                My Causes
-                {/* </NavLink> */}
-              </Menu.Item>
-              <Menu.Item
-                name="MyAccount"
-                active={activeItem === "MyAccount"}
-                onClick={this.handleItemClick}
-              >
-                {users.map(user => (
-                  <p key={user.id}>{user.username}'s Account</p>
-                ))}
-              </Menu.Item>
-              <Menu.Item>
-                <div>{/* <SearchBar /> */}</div>
-              </Menu.Item>
-            </Menu>
-          </Sticky>
-        </Grid.Column>
-        {/* </Rail> */}
-
-        <Grid.Column width={14} floated="right">
-          <Segment>
-            <Features />
-          </Segment>
-        </Grid.Column>
-      </Grid>
+      <Segment>
+        <div class="ui one column stackable center aligned page grid">
+          <div class="column six wide">
+            <Header as="h1" textAlign="center">
+              Featured Causes
+            </Header>{" "}
+            <Segment textAlign="center" color="blue">
+              <SearchBar />
+            </Segment>
+          </div>
+        </div>
+        <Features />
+      </Segment>
     );
   }
 }

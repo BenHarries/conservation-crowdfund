@@ -1,16 +1,14 @@
 import React, { Component } from "react";
-import { Card, Button, Form, Grid } from "semantic-ui-react";
+import { Card, Icon, Grid, Header } from "semantic-ui-react";
 
 class List extends Component {
   state = { users: [] };
-  handleSubmit = event => {
-    event.preventDefault();
-
+  componentDidMount() {
     fetch("/users")
       .then(res => res.json())
       .then(users => this.setState({ users }));
     console.log(this.state);
-  };
+  }
   render() {
     let desired_user = this.state.users.map(user => {
       return (
@@ -18,21 +16,31 @@ class List extends Component {
           <Card
             image={user.profile_pic}
             header={user.username}
-            meta="Friend"
             description={user.causes}
-            extra="and"
           />
         </Grid.Column>
       );
     });
     return (
       <div>
-        <Form onSubmit={this.handleSubmit}>
-          <Button type="submit">List All Users</Button>
-          <Grid stackable columns={2}>
-            <Grid.Row>{desired_user}</Grid.Row>
-          </Grid>
-        </Form>
+        <div>
+          <br />
+          <br />
+          <br />
+          <div class="ui stackable center aligned page grid">
+            <Header as="h2" textAlign="center">
+              <Icon name="users" circular />
+              <Header.Content>All Users</Header.Content>
+            </Header>
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <Card.Group itemsPerRow={2} centered stackable>
+            {desired_user}
+          </Card.Group>
+        </div>
       </div>
     );
   }

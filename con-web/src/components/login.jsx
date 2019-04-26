@@ -1,108 +1,90 @@
-// import React, { Component } from "react";
-// import { userService } from "./_services";
+import React, { Component } from "react";
+import { Form, Button, Segment } from "semantic-ui-react";
+import { Redirect } from "react-router-dom";
+import "./login.css";
 
-// class Login extends Component {
-//   constructor(props) {
-//     super(props);
+class Login extends Component {
+  state = { id: "", username: "", current: "not logged in", errorMessage: "" };
 
-//     userService.logout();
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+  handleSubmit = event => {
+    event.preventDefault();
 
-//     this.state = {
-//       username: "",
-//       password: "",
-//       submitted: false,
-//       loading: false,
-//       error: ""
-//     };
+    const url = "/users/login";
 
-//     this.handleChange = this.handleChange.bind(this);
-//     this.handleSubmit = this.handleSubmit.bind(this);
-//   }
-//   handleChange(e) {
-//     const { name, value } = e.target;
-//     this.setState({ [name]: value });
-//   }
+    const data = {
+      id: this.state.id,
+      username: this.state.username
+    };
 
-//   handleSubmit(e) {
-//     e.preventDefault();
+    console.log("sending", data);
 
-//     this.setState({ submitted: true });
-//     const { username, password, returnUrl } = this.state;
+    fetch(url, {
+      method: "POST", // or ‘PUT’
 
-//     // stop here if form is invalid
-//     if (!(username && password)) {
-//       return;
-//     }
+      body: JSON.stringify(data), // data can be `string` or {object}!
+      headers: { "Content-Type": "application/json" }
+    })
+      .then(result => {
+        if (result.ok) {
+          return result.json();
+        } else {
+          this.setState({ errorMessage: "Authentication Failed" });
+          return;
+        }
+      })
+      .then(
+        user => localStorage.setItem("token", user[0].secret),
+        console.log("yssss"),
+        this.forceUpdate()
+      );
+    //   .then(res => res.json())
+    //   .then(res => console.log("the current users token is", res))
+    //   .then(res => {
+    //     this.setState({ current: res.body }, () => {
+    //       console.log(this.state, "Current User");
+    //     });
+    //   })
+    //   .catch(error => console.error("Error:", error));
+    // console.log("Login State", this.state);
+    // this.setState({ logged_in: true });
+  };
 
-//     this.setState({ loading: true });
-//     userService.login(username, password).then(
-//       user => {
-//         const { from } = this.props.location.state || {
-//           from: { pathname: "/" }
-//         };
-//         this.props.history.push(from);
-//       },
-//       error => this.setState({ error, loading: false })
-//     );
-//   }
-//   render() {
-//     const { username, password, submitted, loading, error } = this.state;
-//     return (
-//       <div className="col-md-6 col-md-offset-3">
-//         <div className="alert alert-info">
-//           Username: test
-//           <br />
-//           Password: test
-//         </div>
-//         <h2>Login</h2>
-//         <form name="form" onSubmit={this.handleSubmit}>
-//           <div
-//             className={
-//               "form-group" + (submitted && !username ? " has-error" : "")
-//             }
-//           >
-//             <label htmlFor="username">Username</label>
-//             <input
-//               type="text"
-//               className="form-control"
-//               name="username"
-//               value={username}
-//               onChange={this.handleChange}
-//             />
-//             {submitted && !username && (
-//               <div className="help-block">Username is required</div>
-//             )}
-//           </div>
-//           <div
-//             className={
-//               "form-group" + (submitted && !password ? " has-error" : "")
-//             }
-//           >
-//             <label htmlFor="password">Password</label>
-//             <input
-//               type="password"
-//               className="form-control"
-//               name="password"
-//               value={password}
-//               onChange={this.handleChange}
-//             />
-//             {submitted && !password && (
-//               <div className="help-block">Password is required</div>
-//             )}
-//           </div>
-//           <div className="form-group">
-//             <button className="btn btn-primary" disabled={loading}>
-//               Login
-//             </button>
-//             {loading && (
-//               <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-//             )}
-//           </div>
-//           {error && <div className={"alert alert-danger"}>{error}</div>}
-//         </form>
-//       </div>
-//     );
-//   }
-// }
+  isAuthenticated() {
+    const token = localStorage.getItem("token");
+    return token && token.length > 5;
+  }
 
-// export default Login;
+  render() {
+    console.log("yesssssss please", this.state);
+    const errorMessage = this.state.errorMessage;
+    const isAlreadyAuthenticated = this.isAuthenticated();
+    return (
+      <div>
+        {isAlreadyAuthenticated ? (
+          <Redirect to={{ pathname: "/" }} />
+        ) : (
+          <div class="login">
+            <Segment>
+              <Form onSubmit={this.handleSubmit} centered>
+                <Form.Input
+                  fluid
+                  icon="user"
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  onChange={this.handleChange}
+                />
+                <Button type="submit">Submit</Button> {errorMessage}
+              </Form>
+            </Segment>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
+export default Login;
