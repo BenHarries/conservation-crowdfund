@@ -42,7 +42,7 @@ class App extends Component {
   }
 
   handleLogout() {
-    localStorage.removeItem("token");
+    localStorage.clear();
     console.log("remove token");
   }
 

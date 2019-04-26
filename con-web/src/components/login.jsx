@@ -22,24 +22,33 @@ class Login extends Component {
     console.log("sending", data);
 
     fetch(url, {
-      method: "POST", // or ‘PUT’
+      method: "POST",
 
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers: { "Content-Type": "application/json" }
     })
-      .then(result => {
-        if (result.ok) {
-          return result.json();
-        } else {
-          this.setState({ errorMessage: "Authentication Failed" });
-          return;
-        }
-      })
+      .then(result => result.json())
       .then(
-        user => localStorage.setItem("token", user[0].secret),
-        console.log("yssss"),
+        res => this.setState({ current: res }),
+        console.log("yesssssss please", this.state),
+
+        // user => localStorage.setItem("token", user[0].secret),
+        // console.log("yssss"),
         this.forceUpdate()
+      )
+      .catch(error => this.setState({ errorMessage: error }));
+
+    if (this.state.current !== "not logged in") {
+      console.log("yes i have the token");
+      localStorage.setItem("token", this.state.current[0].secret);
+      localStorage.setItem("Username", this.state.current[0].username);
+      localStorage.setItem(
+        "ProfileImageUrl",
+        this.state.current[0].profile_pic
       );
+      localStorage.setItem("user_id", this.state.current[0].id);
+      localStorage.setItem("user_causes", this.state.current[0].causes);
+    }
     //   .then(res => res.json())
     //   .then(res => console.log("the current users token is", res))
     //   .then(res => {

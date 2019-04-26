@@ -6,8 +6,18 @@ import "./feature.css";
 const API =
   "http://apiv3.iucnredlist.org/api/v3/species/loxodonta%20africana?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
 
+const fetch_current_user = "users/" + localStorage.Username;
+
 class Feature extends Component {
-  state = { percent: 33, species: this.props.title };
+  constructor(props) {
+    super(props);
+    this.state = {
+      species: this.props.title,
+      added: false,
+      current_user_causes: []
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
 
   increment = () =>
     this.setState({
@@ -34,7 +44,65 @@ class Feature extends Component {
         });
         this.setState({ category: category });
       });
+
+    fetch(fetch_current_user)
+      .then(res => res.json())
+      .then(
+        users => this.setState({ current_user_causes: users[0].causes }),
+        users => console.log("123", users[0].causes),
+        console.log("123", this.state)
+      );
+
+    function arrayContains(needle, arrhaystack) {
+      return arrhaystack.indexOf(needle) > -1;
+    }
+
+    if (
+      this.state.current_user_causes &&
+      arrayContains(this.state.species, this.state.current_user_causes)
+    ) {
+      console.log("True in render", this.state.species);
+      // return true;
+    }
   }
+
+  handleClick() {
+    // this.setState({ added: true });
+    this.forceUpdate();
+    console.log("state", this.state);
+    const data = {
+      user: localStorage.getItem("Username"),
+      cause_to_add: this.state.species
+    };
+
+    fetch("/users/update_cause", {
+      method: "POST",
+
+      body: JSON.stringify(data), // data can be `string` or {object}!
+      headers: { "Content-Type": "application/json" }
+    });
+
+    fetch(fetch_current_user)
+      .then(res => res.json())
+      .then(
+        users => this.setState({ current_user_causes: users[0].causes }),
+        users => console.log("123", users[0].causes),
+        console.log("123", this.state)
+      );
+
+    function arrayContains(needle, arrhaystack) {
+      return arrhaystack.indexOf(needle) > -1;
+    }
+
+    if (
+      this.state.current_user_causes &&
+      arrayContains(this.state.species, this.state.current_user_causes)
+    ) {
+      console.log("True in render", this.state.species);
+      // return true;
+    }
+  }
+
   render() {
     const { key } = this.props;
     const { title } = this.props;
@@ -42,6 +110,27 @@ class Feature extends Component {
     const { category } = this.props;
     const slash = "/";
     const Linker = slash.concat(title);
+
+    function arrayContains(needle, arrhaystack) {
+      return arrhaystack.indexOf(needle) > -1;
+    }
+    // function isAdded() {
+    if (
+      this.state.current_user_causes &&
+      arrayContains(this.state.species, this.state.current_user_causes)
+    ) {
+      console.log("True in render", this.state.species);
+      const added = true;
+      // return true;
+    } else {
+      console.log("false");
+    }
+    // }
+
+    // const added = isAdded();
+
+    // console.log(added);
+
     console.log(Linker);
     return (
       <Card id={key}>
@@ -77,9 +166,11 @@ class Feature extends Component {
             Venezeula, South America
           </a>
           <Progress percent={this.state.percent} indicating size="tiny" /> */}
-          <Button basic color="blue" floated="right">
+
+          <Button basic color="blue" floated="right" onClick={this.handleClick}>
             <Icon name="add" />
           </Button>
+          {/* {added} */}
         </Card.Content>
       </Card>
     );

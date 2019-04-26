@@ -4,7 +4,7 @@ users = [
   {
     id: 1,
     username: "David Attenborough",
-    causes: "Turtle",
+    causes: ["Turtle"],
     profile_pic:
       "https://hips.hearstapps.com/digitalspyuk.cdnds.net/17/16/1492536273-david-attenborough.jpg?crop=0.694xw:1.00xh;0.160xw,0&resize=480:*",
     secret: "ksdjncaksjbciadcn"
@@ -12,7 +12,7 @@ users = [
   {
     id: 2,
     username: "Toby Harries",
-    causes: "Turtle",
+    causes: ["Turtle"],
     profile_pic:
       "https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/52283880_10205056588131613_653197111914921984_o.jpg?_nc_cat=107&_nc_ht=scontent-lhr3-1.xx&oh=b2f88aa6486ac8bd6c11541c46cabed9&oe=5D2DDD51",
     secret: "sjkdfnkjasbssdn"
@@ -69,21 +69,24 @@ router.post("/login", function(req, res, next) {
     console.log("there is a user with this name");
     res.json(user);
     res.status(200);
-
-    // Object is NOT empty
   }
-  console.log(user);
-  // var id_of_item = req.body;
-  // console.log(id_of_item.username);
+});
+router.post("/update_cause", function(req, res, next) {
+  var update = req.body;
+  var causes_appending_to = users.find(usr => usr.username === update.user)
+    .causes;
 
-  // var user = users.filter(user => {
-  //   return user.username == id_of_item.username;
-  // });
-  // console.log("NEWLogin", user);
-  // res.json(user);
+  if (!arrayContains(update.cause_to_add, causes_appending_to)) {
+    causes_appending_to.push(update.cause_to_add);
+  }
+
+  console.log(users);
+  console.log("yes");
 });
 
-module.exports = router;
+function arrayContains(needle, arrhaystack) {
+  return arrhaystack.indexOf(needle) > -1;
+}
 
 function isEmpty(obj) {
   for (var key in obj) {
@@ -91,3 +94,5 @@ function isEmpty(obj) {
   }
   return true;
 }
+
+module.exports = router;
