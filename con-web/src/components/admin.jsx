@@ -6,7 +6,8 @@ import {
   Divider,
   Header,
   Icon,
-  Segment
+  Segment,
+  Message
 } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 
@@ -54,23 +55,43 @@ class Admin extends Component {
       .then(featured_causes => this.setState({ featured_causes }));
   }
 
-  isAuthenticated() {
-    const token = localStorage.getItem("token");
+  isAuthenticated(tok) {
+    const token = tok;
     return token && token === "sjkdfnkjasbssdn";
   }
   render() {
+    const isAlreadyAuthenticated = this.isAuthenticated(
+      localStorage.getItem("token")
+    );
+
     let desired_user = this.state.user.map(user => {
+      var role = "User";
+      if (this.isAuthenticated(user.secret)) {
+        role = "Admin";
+      }
+
+      var user_info = (
+        <div class="ui one column stackable center aligned page grid">
+          <br />
+
+          <Header>{user.username}</Header>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <span>{JSON.stringify(user)}</span>
+        </div>
+      );
       return (
         <Card
           centered
           image={user.profile_pic}
-          header={user.username}
-          description={user.causes}
+          description={user_info}
+          extra={role}
         />
       );
     });
-
-    const isAlreadyAuthenticated = this.isAuthenticated();
 
     return (
       <div>

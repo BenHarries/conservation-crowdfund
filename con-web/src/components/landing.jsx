@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Image, Card, Form, Button } from "semantic-ui-react";
+import { Grid, Image, Card, Form, Button, Header } from "semantic-ui-react";
 // const GridExampleCelledInternally = () => (
 import "./landing.css";
 import Feature from "./feature";
@@ -64,15 +64,14 @@ class MyCauses extends Component {
   }
 
   render() {
-    var users_info = this.state.users;
-    let result = users_info.map(a => a.causes);
     var all_causes = this.state.featured_causes;
     var user_causes = all_causes.map(cause => {
       if (this.arrayContains(cause.species, this.state.current_user_causes)) {
         return cause;
-      } else {
-        return;
       }
+    });
+    user_causes = user_causes.filter(function(element) {
+      return element !== undefined;
     });
     console.log("gggg", all_causes);
     console.log("map if", user_causes);
@@ -93,14 +92,13 @@ class MyCauses extends Component {
 
     return (
       <div class="grid">
-        <Image src={localStorage.getItem("ProfileImageUrl")} />
-
-        <Grid celled="internally">
-          <Grid.Row>
-            Causes You have donated to
-            <Card.Group itemsPerRow={4}>{features}</Card.Group>
-          </Grid.Row>
-        </Grid>
+        {/* <Image src={localStorage.getItem("ProfileImageUrl")} /> */}
+        <div class="ui one column stackable center aligned page grid">
+          <Header>Causes You Follow</Header>
+          <Card.Group itemsPerRow={2} stackable>
+            {features}
+          </Card.Group>
+        </div>
       </div>
     );
   }

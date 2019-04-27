@@ -12,13 +12,11 @@ class List extends Component {
   render() {
     let desired_user = this.state.users.map(user => {
       return (
-        <Grid.Column>
-          <Card
-            image={user.profile_pic}
-            header={user.username}
-            description={user.causes}
-          />
-        </Grid.Column>
+        <Card
+          image={user.profile_pic}
+          header={user.username}
+          description={user.causes}
+        />
       );
     });
     return (

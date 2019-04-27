@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Button, Form, Segment } from "semantic-ui-react";
+import { Button, Form, Segment, Header, Icon } from "semantic-ui-react";
+import { Redirect } from "react-router-dom";
 
 export default class NewFeature extends Component {
   constructor() {
     super();
-    this.state = { id: "", species: "", image: "" };
+    this.state = { id: "", species: "", image: "", added: false };
   }
 
   handleChange = event => {
@@ -22,7 +23,8 @@ export default class NewFeature extends Component {
     const data = {
       id: this.state.id,
       species: this.state.species,
-      image: this.state.image
+      image: this.state.image,
+      token: localStorage.getItem("token")
     };
     console.log("sending", data);
 
@@ -36,13 +38,22 @@ export default class NewFeature extends Component {
       .then(res => console.log("Success:", res))
 
       .catch(error => console.error("Error:", error));
+
+    this.setState({ added: true });
   };
 
   render() {
+    var submitted = this.state.added;
+    var isredirect;
+    if (submitted) {
+      isredirect = <Redirect to={{ pathname: "/" }} />;
+    }
+
     return (
       <div>
         <div class="ui stackable center aligned page grid">
           <Segment Large padded="very">
+            <Header>Add a Conservation Cause</Header>
             <Form onSubmit={this.handleSubmit}>
               <Form.Input
                 fluid
@@ -66,8 +77,9 @@ export default class NewFeature extends Component {
                 onChange={this.handleChange}
               />
               <Button type="submit" color="blue">
-                Create Cause
+                <Icon name="add" />
               </Button>{" "}
+              {isredirect}
             </Form>
           </Segment>
         </div>
