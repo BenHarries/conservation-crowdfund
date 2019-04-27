@@ -15,9 +15,30 @@ let featured_causes = [
   },
   {
     id: 3,
-    species: "Mongoose",
+    species: "Giant Panda",
     image:
-      "https://www.marwell.org.uk/media/images/full/yellow_mongoose_shutterstock_296510669.jpg"
+      "https://c402277.ssl.cf1.rackcdn.com/photos/11551/images/hero_small/Bernard_de_wetter_wwf_canon_113974.jpg?1462218465"
+  },
+  {
+    id: 4,
+    species: "Pangolin",
+    image: "https://mscbcmnsep.files.wordpress.com/2018/02/blog-5.jpg?w=1190"
+  },
+  {
+    id: 5,
+    species: "Crested Tit",
+    image:
+      "http://voice.gardenbird.co.uk/wp-content/uploads/2017/05/Crested-tit-Lophophanes-cristatus.jpg"
+  },
+  {
+    id: 6,
+    species: "Tiger",
+    image: "https://cdn.britannica.com/s:300x500/71/174271-050-B90CC219.jpg"
+  },
+  {
+    id: 6,
+    species: "Blue Whale",
+    image: "https://cdn.britannica.com/s:300x500/73/161673-050-7071CE8B.jpg"
   }
 ];
 

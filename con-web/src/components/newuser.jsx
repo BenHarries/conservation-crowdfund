@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Form, Segment, Header, Icon } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 
-export default class NewFeature extends Component {
+export default class NewUser extends Component {
   constructor() {
     super();
     this.state = { id: "", username: "", causes: [], profile_pic: "" };
@@ -49,7 +49,7 @@ export default class NewFeature extends Component {
       <div>
         <div class="ui stackable center aligned page grid">
           <Segment Large padded="very">
-            <Header>Add a Conservation Cause</Header>
+            <Header>Add a New User</Header>
             <Form onSubmit={this.handleSubmit}>
               <Form.Input
                 fluid

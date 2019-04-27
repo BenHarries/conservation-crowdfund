@@ -62,15 +62,6 @@ class App extends Component {
       <Router>
         <div>
           <Menu stackable>
-            <Link to={"/"} className="nav-link">
-              <Menu.Item
-                name="editorials"
-                active={activeItem === "editorials"}
-                onClick={this.handleItemClick}
-              >
-                Featured Causes
-              </Menu.Item>
-            </Link>
             {!isAlreadyAuthenticated ? (
               " "
             ) : (
@@ -87,15 +78,31 @@ class App extends Component {
                   onClick={this.handleItemClick}
                 >
                   <div>
-                    <Image
+                    {/* <Image
                       src={localStorage.getItem("ProfileImageUrl")}
                       avatar
                     />
-                    <span>{localStorage.getItem("Username")}'s Causes</span>
+                    <span>{localStorage.getItem("Username")}'s Causes</span> */}
+                    <Header as="h3">
+                      <Image
+                        circular
+                        src={localStorage.getItem("ProfileImageUrl")}
+                      />{" "}
+                      {localStorage.getItem("Username")}'s Causes
+                    </Header>
                   </div>
                 </Menu.Item>
               </Link>
             )}
+            <Link to={"/"} className="nav-link">
+              <Menu.Item
+                name="editorials"
+                active={activeItem === "editorials"}
+                onClick={this.handleItemClick}
+              >
+                Featured Causes
+              </Menu.Item>
+            </Link>
 
             <Link to={"/admin"} className="nav-link">
               <Menu.Item

@@ -13,6 +13,7 @@ import { Redirect } from "react-router-dom";
 
 import "./admin.css";
 import NewFeature from "./test_send";
+import NewUser from "./newuser";
 import List from "./list";
 class Admin extends Component {
   state = { users: [], user: [] };
@@ -120,7 +121,10 @@ class Admin extends Component {
             <Grid columns={2} divided relaxed="very" centered stackable>
               <Grid.Row verticalAlign="middle">
                 <Grid.Column textAlign="center" verticalAlign="middle">
-                  <NewFeature />
+                  <Segment.Group horizontal>
+                    <NewFeature />
+                    <NewUser />
+                  </Segment.Group>
                 </Grid.Column>
                 <Grid.Column textAlign="center" verticalAlign="middle">
                   <Grid.Row verticalAlign="middle">
