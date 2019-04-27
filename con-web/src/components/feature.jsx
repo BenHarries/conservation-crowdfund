@@ -7,6 +7,7 @@ const API =
   "http://apiv3.iucnredlist.org/api/v3/species/loxodonta%20africana?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
 
 const fetch_current_user = "users/" + localStorage.Username;
+console.log("now thats what", fetch_current_user);
 
 class Feature extends Component {
   constructor(props) {
@@ -50,7 +51,9 @@ class Feature extends Component {
       .then(
         users => this.setState({ current_user_causes: users[0].causes }),
         users => console.log("123", users[0].causes),
-        console.log("123", this.state)
+        console.log("123", this.state),
+
+        users => (window.AllCauses = users[0].causes)
       );
 
     function arrayContains(needle, arrhaystack) {
@@ -87,9 +90,9 @@ class Feature extends Component {
       .then(
         users => this.setState({ current_user_causes: users[0].causes }),
         users => console.log("123", users[0].causes),
-        console.log("123", this.state)
+        console.log("123", this.state),
+        users => (window.AllCauses = users[0].causes)
       );
-
     function arrayContains(needle, arrhaystack) {
       return arrhaystack.indexOf(needle) > -1;
     }
@@ -103,6 +106,33 @@ class Feature extends Component {
     }
   }
 
+  arrayContains(needle, arrhaystack) {
+    return arrhaystack.indexOf(needle) > -1;
+  }
+
+  isAdded() {
+    if (
+      this.state.current_user_causes &&
+      this.arrayContains(this.state.species, this.state.current_user_causes)
+    ) {
+      console.log("True in render", this.state.species);
+      return (
+        <Button basic color="green" floated="right">
+          <Icon name="check" />{" "}
+        </Button>
+      );
+      // return true;
+    } else {
+      console.log("false");
+
+      return (
+        <Button basic color="blue" floated="right" onClick={this.handleClick}>
+          <Icon name="add" />{" "}
+        </Button>
+      );
+    }
+  }
+
   render() {
     const { key } = this.props;
     const { title } = this.props;
@@ -110,24 +140,11 @@ class Feature extends Component {
     const { category } = this.props;
     const slash = "/";
     const Linker = slash.concat(title);
-
-    function arrayContains(needle, arrhaystack) {
-      return arrhaystack.indexOf(needle) > -1;
-    }
     // function isAdded() {
-    if (
-      this.state.current_user_causes &&
-      arrayContains(this.state.species, this.state.current_user_causes)
-    ) {
-      console.log("True in render", this.state.species);
-      const added = true;
-      // return true;
-    } else {
-      console.log("false");
-    }
+
     // }
 
-    // const added = isAdded();
+    const added = this.isAdded();
 
     // console.log(added);
 
@@ -167,10 +184,10 @@ class Feature extends Component {
           </a>
           <Progress percent={this.state.percent} indicating size="tiny" /> */}
 
-          <Button basic color="blue" floated="right" onClick={this.handleClick}>
+          {/* <Button basic color="blue" floated="right" onClick={this.handleClick}>
             <Icon name="add" />
-          </Button>
-          {/* {added} */}
+          </Button> */}
+          {added}
         </Card.Content>
       </Card>
     );

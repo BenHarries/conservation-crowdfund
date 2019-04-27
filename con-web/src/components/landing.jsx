@@ -4,8 +4,11 @@ import { Grid, Image, Card, Form, Button } from "semantic-ui-react";
 import "./landing.css";
 import Feature from "./feature";
 
+const fetch_current_user = "users/" + localStorage.Username;
+console.log("now thats what", fetch_current_user);
+
 class MyCauses extends Component {
-  state = { users: [], featured_causes: [], user: [] };
+  state = { users: [], featured_causes: [], user: [], current_user_causes: [] };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -46,31 +49,52 @@ class MyCauses extends Component {
     fetch("/featured_causes")
       .then(res => res.json())
       .then(featured_causes => this.setState({ featured_causes }));
+
+    fetch(fetch_current_user)
+      .then(res => res.json())
+      .then(
+        users => this.setState({ current_user_causes: users[0].causes }),
+        users => console.log("1234", users[0].causes),
+        console.log("123", this.state)
+      );
+  }
+
+  arrayContains(needle, arrhaystack) {
+    return arrhaystack.indexOf(needle) > -1;
   }
 
   render() {
     var users_info = this.state.users;
     let result = users_info.map(a => a.causes);
     var all_causes = this.state.featured_causes;
-    var user_causes = all_causes.filter(featured_cause => {
-      return featured_cause.species == result;
+    var user_causes = all_causes.map(cause => {
+      if (this.arrayContains(cause.species, this.state.current_user_causes)) {
+        return cause;
+      } else {
+        return;
+      }
     });
     console.log("gggg", all_causes);
+    console.log("map if", user_causes);
     console.log("STATE", this.state);
+    var features;
+    if (user_causes[0] == null) {
+      features = <p>you have no followed any causes</p>;
+    } else {
+      console.log("these causes are", user_causes);
+      features = user_causes.map(cause => {
+        if (cause !== null) {
+          return <Feature title={cause.species} image={cause.image} />;
+        }
+      });
+    }
 
-    let features = user_causes.map(featured_cause => {
-      return (
-        <Feature
-          key={featured_cause.id}
-          title={featured_cause.species}
-          image={featured_cause.image}
-        />
-      );
-    });
     console.log("yyyy", features);
 
     return (
       <div class="grid">
+        <Image src={localStorage.getItem("ProfileImageUrl")} />
+
         <Grid celled="internally">
           <Grid.Row>
             Causes You have donated to

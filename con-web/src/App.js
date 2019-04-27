@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Menu } from "semantic-ui-react";
+import { Menu, Header, Icon, Image } from "semantic-ui-react";
 
 import NavBar from "./components/newnav";
 import MyCauses from "./components/landing";
@@ -40,19 +40,29 @@ class App extends Component {
     //   .catch(error => this.setState({ error }));
     // console.log("featured?", this.state);
   }
+  isAuthenticated() {
+    const token = localStorage.getItem("token");
+    return token && token !== "sn";
+  }
 
   handleLogout() {
-    localStorage.clear();
+    localStorage.setItem("token", "");
+    localStorage.setItem("Username", "");
+    localStorage.setItem("ProfileImageUrl", "");
+    localStorage.setItem("user_id", "");
+    localStorage.setItem("user_causes", "");
+
     console.log("remove token");
   }
 
   render() {
     const { activeItem } = this.state;
+    const isAlreadyAuthenticated = this.isAuthenticated();
 
     return (
       <Router>
         <div>
-          <Menu>
+          <Menu stackable>
             <Link to={"/"} className="nav-link">
               <Menu.Item
                 name="editorials"
@@ -62,15 +72,32 @@ class App extends Component {
                 Featured Causes
               </Menu.Item>
             </Link>
-            <Link to={"/mycauses"} className="nav-link">
-              <Menu.Item
-                name="upcomingEvents"
-                active={activeItem === "upcomingEvents"}
-                onClick={this.handleItemClick}
-              >
-                My Causes
-              </Menu.Item>
-            </Link>
+            {!isAlreadyAuthenticated ? (
+              " "
+            ) : (
+              // <div class="ui stackable center aligned page grid">
+              //   <Header as="h1" icon Centered>
+              //     <Icon name="window close" color="red" />
+              //     Login to see your causes
+              //   </Header>
+              // </div>
+              <Link to={"/mycauses"} className="nav-link">
+                <Menu.Item
+                  name="upcomingEvents"
+                  active={activeItem === "upcomingEvents"}
+                  onClick={this.handleItemClick}
+                >
+                  <div>
+                    <Image
+                      src={localStorage.getItem("ProfileImageUrl")}
+                      avatar
+                    />
+                    <span>{localStorage.getItem("Username")}'s Causes</span>
+                  </div>
+                </Menu.Item>
+              </Link>
+            )}
+
             <Link to={"/admin"} className="nav-link">
               <Menu.Item
                 name="reviews"
@@ -80,22 +107,31 @@ class App extends Component {
                 Admin
               </Menu.Item>
             </Link>
-
-            <Link to={"/login"} className="nav-link">
-              <Menu.Item
-                name="Login"
-                active={activeItem === "upcomingEvents"}
-                onClick={this.handleItemClick}
-              >
-                {/* {users.map(user => (
+            {isAlreadyAuthenticated ? (
+              " "
+            ) : (
+              <Link to={"/login"} className="nav-link">
+                <Menu.Item
+                  name="Login"
+                  active={activeItem === "upcomingEvents"}
+                  onClick={this.handleItemClick}
+                >
+                  {/* {users.map(user => (
                   <p key={user.id}>{user.username}'s Account</p>
                 ))}{" "} */}
-                Login
-              </Menu.Item>
-            </Link>
-            <Link to={"/login"} className="nav-link">
-              <Menu.Item onClick={this.handleLogout}>Logout</Menu.Item>
-            </Link>
+                  Login
+                </Menu.Item>
+              </Link>
+            )}
+            {!isAlreadyAuthenticated ? (
+              " "
+            ) : (
+              <Link to={"/login"} className="nav-link">
+                <Menu.Item onClick={this.handleLogout}>
+                  Logout {localStorage.getItem("Username")}
+                </Menu.Item>
+              </Link>
+            )}
           </Menu>
 
           <hr />

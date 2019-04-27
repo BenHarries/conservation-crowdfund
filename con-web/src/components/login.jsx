@@ -48,6 +48,10 @@ class Login extends Component {
       );
       localStorage.setItem("user_id", this.state.current[0].id);
       localStorage.setItem("user_causes", this.state.current[0].causes);
+
+      var myNamespace = window.myNamespace || {};
+      myNamespace.Username = this.state.current[0].username;
+      myNamespace.Causes = this.state.current[0].causes;
     }
     //   .then(res => res.json())
     //   .then(res => console.log("the current users token is", res))
@@ -70,6 +74,9 @@ class Login extends Component {
     console.log("yesssssss please", this.state);
     const errorMessage = this.state.errorMessage;
     const isAlreadyAuthenticated = this.isAuthenticated();
+    // if (isAlreadyAuthenticated) {
+    //   window.location.reload();
+    // }
     return (
       <div>
         {isAlreadyAuthenticated ? (
