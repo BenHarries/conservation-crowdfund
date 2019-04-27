@@ -84,6 +84,13 @@ router.post("/update_cause", function(req, res, next) {
   console.log("yes");
 });
 
+// router.post("/new_user", function(req, res, next) {
+//   var update = req.body;
+//   users.push(req.body);
+//   console.log(req.body);
+//   console.log("yes");
+// });
+
 function arrayContains(needle, arrhaystack) {
   return arrhaystack.indexOf(needle) > -1;
 }

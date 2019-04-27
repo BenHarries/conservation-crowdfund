@@ -5,9 +5,7 @@ import { Menu, Header, Icon, Image } from "semantic-ui-react";
 import NavBar from "./components/newnav";
 import MyCauses from "./components/landing";
 import Admin from "./components/admin";
-import Turtle from "./components/project";
 import Login from "./components/login";
-import { Redirect } from "react-router-dom";
 
 class App extends Component {
   state = { featured_causes: [] };
@@ -51,6 +49,7 @@ class App extends Component {
     localStorage.setItem("ProfileImageUrl", "");
     localStorage.setItem("user_id", "");
     localStorage.setItem("user_causes", "");
+    window.location.reload();
 
     console.log("remove token");
   }

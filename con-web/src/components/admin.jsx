@@ -65,7 +65,7 @@ class Admin extends Component {
     );
 
     let desired_user = this.state.user.map(user => {
-      var role = "User";
+      var role = "User (non-admin)";
       if (this.isAuthenticated(user.secret)) {
         role = "Admin";
       }
@@ -86,6 +86,7 @@ class Admin extends Component {
       return (
         <Card
           centered
+          meta={<Header>{role}</Header>}
           image={user.profile_pic}
           description={user_info}
           extra={role}
