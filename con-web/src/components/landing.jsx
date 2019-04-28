@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Image, Card, Form, Button, Header } from "semantic-ui-react";
+import { Redirect } from "react-router-dom";
 // const GridExampleCelledInternally = () => (
 import "./landing.css";
 import Feature from "./feature";
@@ -63,6 +64,10 @@ class MyCauses extends Component {
     return arrhaystack.indexOf(needle) > -1;
   }
 
+  isAuthenticated(tok) {
+    const token = tok;
+    return token && token === "sjkdfnkjasbssdn";
+  }
   render() {
     var all_causes = this.state.featured_causes;
     var user_causes = all_causes.map(cause => {
@@ -89,16 +94,25 @@ class MyCauses extends Component {
     }
 
     console.log("yyyy", features);
-
+    const isAlreadyAuthenticated = this.isAuthenticated(
+      localStorage.getItem("token")
+    );
     return (
-      <div class="grid">
-        {/* <Image src={localStorage.getItem("ProfileImageUrl")} /> */}
-        <div class="ui one column stackable center aligned page grid">
-          <Header>Causes You Follow</Header>
-          <Card.Group itemsPerRow={2} stackable>
-            {features}
-          </Card.Group>
-        </div>
+      <div>
+        {" "}
+        {!isAlreadyAuthenticated ? (
+          <Redirect to={{ pathname: "/" }} />
+        ) : (
+          <div class="grid">
+            {/* <Image src={localStorage.getItem("ProfileImageUrl")} /> */}
+            <div class="ui one column stackable center aligned page grid">
+              <Header>Causes You Follow</Header>
+              <Card.Group itemsPerRow={2} stackable>
+                {features}
+              </Card.Group>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

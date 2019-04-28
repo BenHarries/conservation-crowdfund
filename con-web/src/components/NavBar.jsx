@@ -27,7 +27,7 @@ export default class Navbar extends Component {
 
     return (
       <Menu>
-        <NavLink to="/">
+        <NavLink to="/featured_causes">
           <Menu.Item
             name="editorials"
             active={activeItem === "editorials"}

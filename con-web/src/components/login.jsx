@@ -102,24 +102,27 @@ class Login extends Component {
     }
     return (
       <div>
-        {isAlreadyAuthenticated ? (
-          <Redirect to={{ pathname: "/" }} />
-        ) : (
-          <div class="login">
-            <Segment>
-              <Form onSubmit={this.handleSubmit} centered>
-                <Form.Input
-                  fluid
-                  icon="user"
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  onChange={this.handleChange}
-                />
-                <Button type="submit">Submit</Button> {errorMessage}
-              </Form>
-            </Segment>
-          </div>
+        <div>
+          {isAlreadyAuthenticated ? (
+            <Redirect to={{ pathname: "/featured_causes" }} />
+          ) : (
+            <div class="login">
+              <Segment>
+                <Form onSubmit={this.handleSubmit} centered>
+                  <Form.Input
+                    fluid
+                    icon="user"
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    onChange={this.handleChange}
+                  />
+                  <Button type="submit">Submit</Button> {errorMessage}
+                </Form>
+              </Segment>
+            </div>
+          )}
+        </div>
         )}
       </div>
     );

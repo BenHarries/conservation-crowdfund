@@ -94,29 +94,36 @@ class App extends Component {
                 </Menu.Item>
               </Link>
             )}
-            <Link to={"/"} className="nav-link">
-              <Menu.Item
-                name="editorials"
-                active={activeItem === "editorials"}
-                onClick={this.handleItemClick}
-              >
-                Featured Causes
-              </Menu.Item>
-            </Link>
-
-            <Link to={"/admin"} className="nav-link">
-              <Menu.Item
-                name="reviews"
-                active={activeItem === "reviews"}
-                onClick={this.handleItemClick}
-              >
-                Admin
-              </Menu.Item>
-            </Link>
+            {!isAlreadyAuthenticated ? (
+              " "
+            ) : (
+              <Link to={"/featured_causes"} className="nav-link">
+                <Menu.Item
+                  name="editorials"
+                  active={activeItem === "editorials"}
+                  onClick={this.handleItemClick}
+                >
+                  Featured Causes
+                </Menu.Item>
+              </Link>
+            )}
+            {!isAlreadyAuthenticated ? (
+              " "
+            ) : (
+              <Link to={"/admin"} className="nav-link">
+                <Menu.Item
+                  name="reviews"
+                  active={activeItem === "reviews"}
+                  onClick={this.handleItemClick}
+                >
+                  Admin
+                </Menu.Item>
+              </Link>
+            )}
             {isAlreadyAuthenticated ? (
               " "
             ) : (
-              <Link to={"/login"} className="nav-link">
+              <Link to={"/"} className="nav-link">
                 <Menu.Item
                   name="Login"
                   active={activeItem === "upcomingEvents"}
@@ -132,7 +139,7 @@ class App extends Component {
             {!isAlreadyAuthenticated ? (
               " "
             ) : (
-              <Link to={"/login"} className="nav-link">
+              <Link to={"/"} className="nav-link">
                 <Menu.Item onClick={this.handleLogout}>
                   Logout {localStorage.getItem("Username")}
                 </Menu.Item>
@@ -141,21 +148,23 @@ class App extends Component {
           </Menu>
 
           <hr />
+
           <Switch>
-            <Route exact path="/" component={NavBar} />
             <Route path="/admin" component={Admin} />
             <Route path="/mycauses" component={MyCauses} />
-            <Route path="/login" component={Login} />
 
-            {/* {featured_causes.map(cause => {
+            <Route exact path="/" component={Login} />
+            <Route path="/featured_causes" component={NavBar} />
+          </Switch>
+
+          {/* {featured_causes.map(cause => {
               console.log("aaaaa", cause.species);
               const compon = String.raw(cause.component);
 
               return (
-                <Route exact path={"/" + cause.species} component={Turtle} />
+                <Route exact path={xwx + cause.species} component={Turtle} />
               );
             })} */}
-          </Switch>
         </div>
       </Router>
     );

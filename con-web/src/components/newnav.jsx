@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Grid, Menu, Segment, Sticky, Header } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import Features from "./features";
 import MyCauses from "./landing";
@@ -79,11 +80,15 @@ export default class NavBar extends Component {
   }
   handleContextRef = contextRef => this.setState({ contextRef });
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-
+  isAuthenticated() {
+    const token = localStorage.getItem("token");
+    return token && token.length > 5;
+  }
   render() {
     const { activeItem } = this.state;
     const { contextRef } = this.state;
     const { users, isLoading, error } = this.state;
+    var isAlreadyAuthenticated = this.isAuthenticated();
 
     // if (error) {
     //   return <p>{error.message}</p>;
@@ -93,19 +98,25 @@ export default class NavBar extends Component {
     //   return <p>Loading...</p>;
     // }
     return (
-      <Segment>
-        <div class="ui one column stackable center aligned page grid">
-          <div class="column six wide">
-            <Header as="h1" textAlign="center">
-              Featured Causes
-            </Header>{" "}
-            <Segment textAlign="center" color="blue">
-              <SearchBar />
-            </Segment>
-          </div>
-        </div>
-        <Features />
-      </Segment>
+      <div>
+        {!isAlreadyAuthenticated ? (
+          <Redirect to={{ pathname: "/" }} />
+        ) : (
+          <Segment>
+            <div class="ui one column stackable center aligned page grid">
+              <div class="column six wide">
+                <Header as="h1" textAlign="center">
+                  Featured Causes
+                </Header>{" "}
+                <Segment textAlign="center" color="blue">
+                  <SearchBar />
+                </Segment>
+              </div>
+            </div>
+            <Features />
+          </Segment>
+        )}
+      </div>
     );
   }
 }

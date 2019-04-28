@@ -46,7 +46,7 @@ export default class NewFeature extends Component {
     var submitted = this.state.added;
     var isredirect;
     if (submitted) {
-      isredirect = <Redirect to={{ pathname: "/admin" }} />;
+      isredirect = <Redirect to={{ pathname: "/featured_causes" }} />;
     }
 
     return (
