@@ -1,6 +1,7 @@
 import { shallow } from "enzyme";
+import React from "react";
 
-import Features from "./con-web/src/components/features";
+import Features from "./components/features";
 
 describe("ExampleComponent", () => {
   it("fetches data from server when server returns a successful response", done => {
