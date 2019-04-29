@@ -52,7 +52,7 @@ export default class NewFeature extends Component {
     return (
       <div>
         <div class="ui stackable center aligned page grid">
-          <Segment Large padded="very">
+          <Segment Large padded>
             <Header>Add a Conservation Cause</Header>
             <Form onSubmit={this.handleSubmit}>
               <Form.Input

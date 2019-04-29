@@ -59,11 +59,15 @@ router.get("/", function(req, res, next) {
 //   res.send(featured_cause);
 // });
 
+// router.get("/:featured_cause", function(req, res, next) {
+//   var id_of_item = req.params;
+//   console.log(id_of_item.username);
+
+//   var feature = featured_causes.filter(cause => {
+//     return cause.username === id_of_item.username;
+//   });
+
 router.post("/", function(req, res) {
-  // var feature;
-  // feature.id = req.body.id;
-  // feature.species = req.body.species;
-  // feature.image = req.body.image;
   console.log("NEWFEATUREPOST", req.body);
   var token = req.body.token;
   console.log("UserToken", token);

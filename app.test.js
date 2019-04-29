@@ -22,6 +22,22 @@ describe("Test a User GET", () => {
   });
 });
 
+describe("Test a Featured_causes GET", () => {
+  test("It should Content Type of application/json", async () => {
+    // var  = 300;
+    fetch("http://localhost:3001/users")
+      // .then(user => console.log("resss", user, Array.isArray(user)))
+      .then(response =>
+        expect(
+          ////SEE IF THIS ONE HAS JSON RESPONSE
+          response.headers.get("content-type").indexOf("application/json") !==
+            -1
+        ).toBe(true)
+      );
+    // .catch(err => expect(err.status).toBe(300));
+  });
+});
+
 describe("Test a User Info GET", () => {
   test("It should return David Attenboroug's details", async () => {
     var David_info = [

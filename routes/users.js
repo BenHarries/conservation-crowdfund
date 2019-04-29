@@ -35,7 +35,7 @@ router.get("/:username", function(req, res, next) {
 
   if (isEmpty(user)) {
     console.log("there is no user with this name");
-    res.status(500);
+    res.status(400);
     res.json({
       message: "No user with this name",
       error: "No user with this name"
@@ -45,6 +45,7 @@ router.get("/:username", function(req, res, next) {
     console.log("there is a user with this name");
     res.json(user);
     res.status(200);
+    console.log("yeah nice one", res.headers);
 
     // Object is NOT empty
   }
@@ -61,7 +62,7 @@ router.post("/login", function(req, res, next) {
 
   if (isEmpty(user)) {
     console.log("there is no user with this name");
-    res.status(500);
+    res.status(400);
     res.json({
       message: "No user with this name",
       error: "No user with this name"
@@ -73,6 +74,7 @@ router.post("/login", function(req, res, next) {
     res.status(200);
   }
 });
+
 router.post("/update_cause", function(req, res, next) {
   var update = req.body;
   var causes_appending_to = users.find(usr => usr.username === update.user)
@@ -92,6 +94,7 @@ router.post("/new_user", function(req, res, next) {
   users.push(update);
   console.log("new user added", req.body);
   console.log("yes");
+  res.status(200);
 });
 
 function arrayContains(needle, arrhaystack) {

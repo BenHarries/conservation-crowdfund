@@ -82,13 +82,17 @@ class Admin extends Component {
         <div class="ui one column stackable center aligned page grid">
           <br />
 
+          <Header>{user.username}!</Header>
+          <br />
+          <br />
+          <Header>User Id: {user.id}</Header>
+          <Header>User Causes: {user.causes}</Header>
           <Header>{user.username}</Header>
           <br />
           <br />
           <br />
           <br />
           <br />
-          <span>{JSON.stringify(user)}</span>
         </div>
       );
       return (
@@ -133,9 +137,13 @@ class Admin extends Component {
                 <Grid columns={2} divided relaxed="very" centered stackable>
                   <Grid.Row verticalAlign="middle">
                     <Grid.Column textAlign="center" verticalAlign="middle">
-                      <Segment.Group horizontal>
-                        <NewFeature />
-                        <NewUser />
+                      <Segment.Group horizontal padded>
+                        <Segment>
+                          <NewFeature />
+                        </Segment>
+                        <Segment>
+                          <NewUser />
+                        </Segment>
                       </Segment.Group>
                     </Grid.Column>
                     <Grid.Column textAlign="center" verticalAlign="middle">
