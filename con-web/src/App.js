@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Menu, Header, Icon, Image } from "semantic-ui-react";
+import { Menu, Header, Image } from "semantic-ui-react";
 
 import NavBar from "./components/newnav";
 import MyCauses from "./components/landing";

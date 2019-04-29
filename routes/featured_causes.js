@@ -67,7 +67,7 @@ router.post("/", function(req, res) {
   console.log("NEWFEATUREPOST", req.body);
   var token = req.body.token;
   console.log("UserToken", token);
-  if (token == Admin_Token) {
+  if (token === Admin_Token) {
     featured_causes.unshift(req.body);
   } else {
     res.status(403);

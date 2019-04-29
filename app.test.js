@@ -1,11 +1,3 @@
-// const { fetch_users } = require("./http");
-
-// test("should return an array of users", () => {
-//   it("can add two numbers", () => {
-//     const sum: number = 2 + 2;
-//     expect(sum).toBe(4);
-//   });
-// });
 const fetch = require("node-fetch");
 
 describe("Test a User GET", () => {

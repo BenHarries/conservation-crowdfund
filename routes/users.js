@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
-users = [
+var users = [
   {
     id: 1,
-    username: "David Attenborough",
+    username: "David",
     causes: ["Turtle"],
     profile_pic:
       "https://hips.hearstapps.com/digitalspyuk.cdnds.net/17/16/1492536273-david-attenborough.jpg?crop=0.694xw:1.00xh;0.160xw,0&resize=480:*",
@@ -22,18 +22,20 @@ users = [
 /* GET users listing. */
 router.get("/", function(req, res, next) {
   res.json(users);
+  res.status(200);
 });
+
 router.get("/:username", function(req, res, next) {
   var id_of_item = req.params;
   console.log(id_of_item.username);
 
   var user = users.filter(user => {
-    return user.username == id_of_item.username;
+    return user.username === id_of_item.username;
   });
 
   if (isEmpty(user)) {
     console.log("there is no user with this name");
-    res.status(err.status || 500);
+    res.status(500);
     res.json({
       message: "No user with this name",
       error: "No user with this name"
@@ -54,12 +56,12 @@ router.post("/login", function(req, res, next) {
   console.log(id_of_item.username);
 
   var user = users.filter(user => {
-    return user.username == id_of_item.username;
+    return user.username === id_of_item.username;
   });
 
   if (isEmpty(user)) {
     console.log("there is no user with this name");
-    res.status(err.status || 500);
+    res.status(500);
     res.json({
       message: "No user with this name",
       error: "No user with this name"
