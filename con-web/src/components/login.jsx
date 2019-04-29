@@ -32,13 +32,15 @@ class Login extends Component {
       .then(result => result.json())
 
       .catch(error => {
+        console.log("error time", error);
         this.setState({ errorMessage: error });
+        return;
       })
 
       .then(res => {
         this.setState({ current: res });
+        localStorage.setItem("token", res[0].secret);
         console.log("yes i have the token");
-        localStorage.setItem("token", this.state.current[0].secret);
         localStorage.setItem("Username", this.state.current[0].username);
         localStorage.setItem(
           "ProfileImageUrl",
@@ -46,13 +48,26 @@ class Login extends Component {
         );
         localStorage.setItem("user_id", this.state.current[0].id);
         localStorage.setItem("user_causes", this.state.current[0].causes);
+        this.setState();
 
         var myNamespace = window.myNamespace || {};
         myNamespace.Username = this.state.current[0].username;
         myNamespace.Causes = this.state.current[0].causes;
       })
+      .then(res => {
+        return new Promise(
+          function(resolve) {
+            setTimeout(resolve, 1000);
+          },
+          this.setState({ now: true }),
+          window.location.reload()
+        );
+      })
       // .then(history.push("/featured_causes"));
-      .then(window.location.reload());
+      // .then(this.setState())
+      .then(this.setState({ now: true }))
+
+      .then(console.log("Alpha"));
 
     //     console.log("yes i have the token");
     //     localStorage.setItem("token", this.state.current[0].secret);
@@ -85,7 +100,7 @@ class Login extends Component {
   }
 
   render() {
-    console.log("yesssssss please", this.state);
+    console.log("Rendered Again", this.state);
     const errorMessage = this.state.errorMessage;
     var isAlreadyAuthenticated = this.isAuthenticated();
     return (

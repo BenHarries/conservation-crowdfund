@@ -62,7 +62,7 @@ router.get("/:username", function(req, res, next) {
 
   if (isEmpty(user)) {
     console.log("there is no user with this name");
-    res.status(400); //should make there be a catch
+    res.status(500); //should make there be a catch
     res.json({
       message: "No user with this name",
       error: "No user with this name"
