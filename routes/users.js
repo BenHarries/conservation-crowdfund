@@ -11,11 +11,35 @@ var users = [
   },
   {
     id: 2,
-    username: "Toby Harries",
-    causes: ["Turtle"],
+    username: "Steve",
+    causes: ["Giant Panda"],
     profile_pic:
       "https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/52283880_10205056588131613_653197111914921984_o.jpg?_nc_cat=107&_nc_ht=scontent-lhr3-1.xx&oh=b2f88aa6486ac8bd6c11541c46cabed9&oe=5D2DDD51",
     secret: "sjkdfnkjasbssdn"
+  },
+  {
+    id: 3,
+    username: "Lucy",
+    causes: ["Pangolin"],
+    profile_pic:
+      "https://cdn.shopify.com/s/files/1/2486/7062/files/RWL_04122017-SHOT-11-0377-1_CJH_2048x.jpg?v=1515492906",
+    secret: "ksdjncaksjbciadcn"
+  },
+  {
+    id: 4,
+    username: "Jane",
+    causes: ["Giraffe"],
+    profile_pic:
+      "https://i.pinimg.com/564x/ea/bf/d2/eabfd23d706d0f5fac29e84102964ec6.jpg",
+    secret: "ksdjncaksjbciadcn"
+  },
+  {
+    id: 5,
+    username: "Alex",
+    causes: ["Mongoose"],
+    profile_pic:
+      "http://footage.framepool.com/shotimg/qf/330879530-red-square-moscow-cap-hat-face.jpg",
+    secret: "ksdjncaksjbciadcn"
   }
 ];
 

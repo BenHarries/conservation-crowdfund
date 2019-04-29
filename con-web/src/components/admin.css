@@ -7,4 +7,5 @@ span {
   width: 100%;
   word-wrap: break-word;
   display: inline-block;
+  font-size: 5pt;
 }

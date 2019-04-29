@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image, Card, Icon, Button, Progress } from "semantic-ui-react";
+import { Image, Card, Icon, Button, Progress, Header } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import "./feature.css";
 
@@ -138,6 +138,7 @@ class Feature extends Component {
     const { title } = this.props;
     const { image } = this.props;
     const { category } = this.props;
+    const { user_who_added } = this.props;
     const slash = "/";
     const Linker = slash.concat(title);
     // function isAdded() {
@@ -167,27 +168,13 @@ class Feature extends Component {
             </span> */}
           </Card.Meta>
           {/* Allows maping turtle nests and increses chance... */}
-          <Card.Description />
+          <Card.Description> </Card.Description>
         </Card.Content>
-        <Card.Content extra>
-          {/* <a>
-            <Icon name="user outline" />
-            22 Backers <br />
-          </a>
-          <a>
-            <Icon name="pound sign" />
-            4,542 pledged <br />
-          </a>
-          <a>
-            <Icon name="map" />
-            Venezeula, South America
-          </a>
-          <Progress percent={this.state.percent} indicating size="tiny" /> */}
 
-          {/* <Button basic color="blue" floated="right" onClick={this.handleClick}>
-            <Icon name="add" />
-          </Button> */}
-          {added}
+        <Card.Content extra>
+          {" "}
+          <Header>Created by: {user_who_added}</Header>
+          <div>{added}</div>
         </Card.Content>
       </Card>
     );

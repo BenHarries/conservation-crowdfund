@@ -16,12 +16,12 @@ import NewFeature from "./test_send";
 import NewUser from "./newuser";
 import List from "./list";
 class Admin extends Component {
-  state = { users: [], user: [] };
+  state = { users: [], user: [], desired_feature: [] };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleSubmit = event => {
+  handleUserSubmit = event => {
     event.preventDefault();
 
     const url = "/users/" + this.state.id;
@@ -38,6 +38,36 @@ class Admin extends Component {
       .then(user => this.setState({ user: user }));
 
     console.log(this.state);
+
+    // fetch(url, {
+    //   method: "POST", // or ‘PUT’
+
+    //   body: JSON.stringify(data), // data can be `string` or {object}!
+    //   headers: { "Content-Type": "application/json" }
+    // })
+    //   .then(res => res.text())
+    //   .then(res => console.log("Success:", res))
+
+    //   .catch(error => console.error("Error:", error));
+  };
+
+  handleFeatureSubmit = event => {
+    event.preventDefault();
+
+    const url = "/featured_causes/desired/" + this.state.feature;
+    console.log("sending", url);
+
+    fetch(url)
+      .then(result => {
+        if (result.ok) {
+          return result.json();
+        } else {
+          throw new Error("There is no user with this feature");
+        }
+      })
+      .then(desired_feature => this.setState({ desired_feature }));
+
+    console.log("STATE OF STATE", this.state);
 
     // fetch(url, {
     //   method: "POST", // or ‘PUT’
@@ -88,6 +118,9 @@ class Admin extends Component {
           <Header>User Id: {user.id}</Header>
           <Header>User Causes: {user.causes}</Header>
           <Header>{user.username}</Header>
+          <span>
+            <p>As Json: {JSON.stringify(user)}</p>
+          </span>
           <br />
           <br />
           <br />
@@ -102,6 +135,36 @@ class Admin extends Component {
           image={user.profile_pic}
           description={user_info}
           extra={role}
+        />
+      );
+    });
+    let desired_cause = this.state.desired_feature.map(cause => {
+      var user_info = (
+        <div class="ui one column stackable center aligned page grid">
+          <br />
+
+          <Header>{cause.species}!</Header>
+          <br />
+          <br />
+          <Header>User Id: {cause.id}</Header>
+          <Header>Added By: {cause.user_who_added}</Header>
+          <span>
+            <p>As Json: {JSON.stringify(cause)}</p>
+          </span>
+
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </div>
+      );
+      return (
+        <Card
+          centered
+          // meta={<Header>{cause}</Header>}
+          image={cause.image}
+          description={user_info}
         />
       );
     });
@@ -154,8 +217,8 @@ class Admin extends Component {
                           <br />
                           <br />
                           <Segment>
-                            Search for a user e.g David Attenborough{" "}
-                            <Form onSubmit={this.handleSubmit} centered>
+                            Search a User for their info e.g David{" "}
+                            <Form onSubmit={this.handleUserSubmit} centered>
                               <Form.Input
                                 fluid
                                 icon="search"
@@ -163,6 +226,18 @@ class Admin extends Component {
                                 type="text"
                                 name="id"
                                 placeholder="Name of User"
+                                onChange={this.handleChange}
+                              />
+                            </Form>
+                            Search a Cause for their info e.g Turtle{" "}
+                            <Form onSubmit={this.handleFeatureSubmit} centered>
+                              <Form.Input
+                                fluid
+                                icon="search"
+                                width={30}
+                                type="text"
+                                name="feature"
+                                placeholder="Name of Cause"
                                 onChange={this.handleChange}
                               />
                             </Form>
@@ -174,7 +249,7 @@ class Admin extends Component {
 
                       <Grid.Row verticalAlign="middle">
                         {" "}
-                        {desired_user}{" "}
+                        {desired_user} {desired_cause}
                       </Grid.Row>
                     </Grid.Column>
 

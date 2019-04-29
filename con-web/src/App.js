@@ -103,7 +103,7 @@ class App extends Component {
                   active={activeItem === "editorials"}
                   onClick={this.handleItemClick}
                 >
-                  Featured Causes
+                  <Header as="h5" icon="like" content="Featured Causes" />
                 </Menu.Item>
               </Link>
             )}
@@ -116,7 +116,7 @@ class App extends Component {
                   active={activeItem === "reviews"}
                   onClick={this.handleItemClick}
                 >
-                  Admin
+                  <Header as="h5" icon="user" content="Admin" />
                 </Menu.Item>
               </Link>
             )}

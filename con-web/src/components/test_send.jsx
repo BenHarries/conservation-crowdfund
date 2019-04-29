@@ -24,7 +24,8 @@ export default class NewFeature extends Component {
       id: this.state.id,
       species: this.state.species,
       image: this.state.image,
-      token: localStorage.getItem("token")
+      token: localStorage.getItem("token"),
+      user_who_added: localStorage.getItem("Username")
     };
     console.log("sending", data);
 
