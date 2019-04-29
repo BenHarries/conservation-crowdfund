@@ -3,11 +3,9 @@ const fetch = require("node-fetch");
 describe("Test a User GET (Content Type/Response Status)", () => {
   test("It should respond with a 200 status", async () => {
     // var  = 300;
-    fetch("http://localhost:3001/users") // console.log("!!!!!!!!!!!!!!!!!", response);
-      // .then(res => console.log(res))
+    fetch("http://localhost:3001/users")
       .then(res => expect(res.status).toBe(200))
-      // .then(res => expect(Array.isArray(res).toBe(true)))
-      .catch(err => expect(err.status).toBe(200));
+      .catch(err => expect(err.status).toBe(300));
   });
 });
 
@@ -16,25 +14,22 @@ describe("Test a User GET (Content Type/Response Status)", () => {
     // var  = 300;
     fetch("http://localhost:3001/users")
       .then(res => res.json())
-      // .then(user => console.log("resss", user, Array.isArray(user)))
-      .then(user => expect(Array.isArray(user)).toBe(true));
-    // .catch(err => expect(err.status).toBe(300));
+      .then(user => expect(Array.isArray(user)).toBe(true))
+      .catch(err => expect(err.status).toBe(300));
   });
 });
 
 describe("Test a User GET (Content Type/Response Status)", () => {
   test("It should Content Type of application/json", async () => {
-    // var  = 300;
     fetch("http://localhost:3001/users")
-      // .then(user => console.log("resss", user, Array.isArray(user)))
       .then(response =>
         expect(
           ////SEE IF THIS ONE HAS JSON RESPONSE
           response.headers.get("content-type").indexOf("application/json") !==
             -1
         ).toBe(true)
-      );
-    // .catch(err => expect(err.status).toBe(300));
+      )
+      .catch(err => expect(err.status).toBe(300));
   });
 });
 
@@ -52,32 +47,28 @@ describe("Test a Specific User Info GET (Content/Response Status)", () => {
     ];
     fetch("http://localhost:3001/users/David")
       .then(res => res.json())
-      // .then(user => console.log("resss", user, Array.isArray(user)))
-      .then(info => expect(info).toEqual(David_info));
-    // .catch(err => expect(err.status).toBe(300));
+      .then(info => expect(info).toEqual(David_info))
+      .catch(err => expect(err.status).toBe(300));
   });
 });
 
 describe("Test a Specific User Info GET (Content/Response Status)", () => {
   test("It should Content Type of application/json", async () => {
-    // var  = 300;
     fetch("http://localhost:3001/users/Steve")
-      // .then(user => console.log("resss", user, Array.isArray(user)))
       .then(response =>
         expect(
           ////SEE IF THIS ONE HAS JSON RESPONSE
           response.headers.get("content-type").indexOf("application/json") !==
             -1
         ).toBe(true)
-      );
-    // .catch(err => expect(err.status).toBe(300));
+      )
+      .catch(err => expect(err.status).toBe(300));
   });
 });
 
 describe("Test a Featured_causes GET", () => {
   test("It should respond with a 200 status", async () => {
-    // var  = 300;
-    fetch("http://localhost:3001/featured_causes") // console.log("!!!!!!!!!!!!!!!!!", response);
+    fetch("http://localhost:3001/featured_causes")
       .then(res => expect(res.status).toBe(200))
       .catch(err => expect(err.status).toBe(200));
   });
@@ -85,16 +76,14 @@ describe("Test a Featured_causes GET", () => {
 
 describe("Test a Featured_causes GET", () => {
   test("It should Content Type of application/json", async () => {
-    // var  = 300;
     fetch("http://localhost:3001/featured_causes")
-      // .then(user => console.log("resss", user, Array.isArray(user)))
       .then(response =>
         expect(
           response.headers.get("content-type").indexOf("application/json") !==
             -1
         ).toBe(true)
-      );
-    // .catch(err => expect(err.status).toBe(300));
+      )
+      .catch(err => expect(err.status).toBe(300));
   });
 });
 
@@ -111,9 +100,8 @@ describe("Test a Specific Feature Info GET (Content/Response Status)", () => {
     ];
     fetch("http://localhost:3001/featured_causes/desired/Pangolin")
       .then(res => res.json())
-      // .then(user => console.log("resss", user, Array.isArray(user)))
-      .then(info => expect(info).toEqual(Pangolin_info));
-    // .catch(err => expect(err.status).toBe(300));
+      .then(info => expect(info).toEqual(Pangolin_info))
+      .catch(err => expect(err.status).toBe(300));
   });
 });
 

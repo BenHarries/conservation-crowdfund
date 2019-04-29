@@ -64,9 +64,9 @@ class MyCauses extends Component {
     return arrhaystack.indexOf(needle) > -1;
   }
 
-  isAuthenticated(tok) {
-    const token = tok;
-    return token && token === "sjkdfnkjasbssdn";
+  isAuthenticated() {
+    const token = localStorage.getItem("token");
+    return token && token.length > 5;
   }
   render() {
     var all_causes = this.state.featured_causes;
@@ -83,7 +83,11 @@ class MyCauses extends Component {
     console.log("STATE", this.state);
     var features;
     if (user_causes[0] == null) {
-      features = <p>you have no followed any causes</p>;
+      features = (
+        <div class="ui stackable center aligned page grid">
+          <Header>You have not Liked any causes</Header>
+        </div>
+      );
     } else {
       console.log("these causes are", user_causes);
       features = user_causes.map(cause => {
@@ -94,9 +98,7 @@ class MyCauses extends Component {
     }
 
     console.log("yyyy", features);
-    const isAlreadyAuthenticated = this.isAuthenticated(
-      localStorage.getItem("token")
-    );
+    const isAlreadyAuthenticated = this.isAuthenticated();
     return (
       <div>
         {" "}
@@ -106,7 +108,9 @@ class MyCauses extends Component {
           <div class="grid">
             {/* <Image src={localStorage.getItem("ProfileImageUrl")} /> */}
             <div class="ui one column stackable center aligned page grid">
-              <Header>Causes You Follow</Header>
+              <Header as="h1">
+                {localStorage.getItem("Username")}'s Causes
+              </Header>
               <Card.Group itemsPerRow={2} stackable>
                 {features}
               </Card.Group>

@@ -49,7 +49,7 @@ class Features extends Component {
           key={featured_cause.id}
           title={featured_cause.species}
           image={featured_cause.image}
-          category={this.state.category}
+          // category={this.state.category}
           user_who_added={featured_cause.user_who_added}
         />
       );

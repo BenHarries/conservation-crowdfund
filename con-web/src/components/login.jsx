@@ -10,6 +10,8 @@ class Login extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
   handleSubmit = event => {
+    const { history } = this.props;
+
     event.preventDefault();
 
     const url = "/users/login";
@@ -28,38 +30,43 @@ class Login extends Component {
       headers: { "Content-Type": "application/json" }
     })
       .then(result => result.json())
-      .then(
-        res => this.setState({ current: res })
-        // user => localStorage.setItem("token", user.secret),
-        // console.log("yesssssss please", this.state),
-        // // localStorage.setItem("token", this.state.current[0].secret),
-        // localStorage.setItem("Username", this.state.current[0].username),
-        // localStorage.setItem(
-        //   "ProfileImageUrl",
-        //   this.state.current[0].profile_pic
-        // ),
-        // localStorage.setItem("user_id", this.state.current[0].id),
-        // localStorage.setItem("user_causes", this.state.current[0].causes)
 
-        // user => localStorage.setItem("token", user[0].secret),
-        // console.log("yssss"),
-        // this.forceUpdate()
-      )
-      .then(window.location.reload())
-      //     console.log("yes i have the token");
-      //     localStorage.setItem("token", this.state.current[0].secret);
-      //     localStorage.setItem("Username", this.state.current[0].username);
-      //     localStorage.setItem(
-      //       "ProfileImageUrl",
-      //       this.state.current[0].profile_pic
-      //     );
-      //     localStorage.setItem("user_id", this.state.current[0].id);
-      //     localStorage.setItem("user_causes", this.state.current[0].causes);
+      .catch(error => {
+        this.setState({ errorMessage: error });
+      })
 
-      //     var myNamespace = window.myNamespace || {};
-      //     myNamespace.Username = this.state.current[0].username;
-      //     myNamespace.Causes = this.state.current[0].causes;)
-      .catch(error => this.setState({ errorMessage: error }));
+      .then(res => {
+        this.setState({ current: res });
+        console.log("yes i have the token");
+        localStorage.setItem("token", this.state.current[0].secret);
+        localStorage.setItem("Username", this.state.current[0].username);
+        localStorage.setItem(
+          "ProfileImageUrl",
+          this.state.current[0].profile_pic
+        );
+        localStorage.setItem("user_id", this.state.current[0].id);
+        localStorage.setItem("user_causes", this.state.current[0].causes);
+
+        var myNamespace = window.myNamespace || {};
+        myNamespace.Username = this.state.current[0].username;
+        myNamespace.Causes = this.state.current[0].causes;
+      })
+      // .then(history.push("/featured_causes"));
+      .then(window.location.reload());
+
+    //     console.log("yes i have the token");
+    //     localStorage.setItem("token", this.state.current[0].secret);
+    //     localStorage.setItem("Username", this.state.current[0].username);
+    //     localStorage.setItem(
+    //       "ProfileImageUrl",
+    //       this.state.current[0].profile_pic
+    //     );
+    //     localStorage.setItem("user_id", this.state.current[0].id);
+    //     localStorage.setItem("user_causes", this.state.current[0].causes);
+
+    //     var myNamespace = window.myNamespace || {};
+    //     myNamespace.Username = this.state.current[0].username;
+    //     myNamespace.Causes = this.state.current[0].causes;)
     //   .then(res => res.json())
     //   .then(res => console.log("the current users token is", res))
     //   .then(res => {
@@ -81,25 +88,6 @@ class Login extends Component {
     console.log("yesssssss please", this.state);
     const errorMessage = this.state.errorMessage;
     var isAlreadyAuthenticated = this.isAuthenticated();
-    // if (isAlreadyAuthenticated) {
-    //   window.location.reload();
-    // }
-
-    if (this.state.current !== "not logged in") {
-      console.log("yes i have the token");
-      localStorage.setItem("token", this.state.current[0].secret);
-      localStorage.setItem("Username", this.state.current[0].username);
-      localStorage.setItem(
-        "ProfileImageUrl",
-        this.state.current[0].profile_pic
-      );
-      localStorage.setItem("user_id", this.state.current[0].id);
-      localStorage.setItem("user_causes", this.state.current[0].causes);
-
-      var myNamespace = window.myNamespace || {};
-      myNamespace.Username = this.state.current[0].username;
-      myNamespace.Causes = this.state.current[0].causes;
-    }
     return (
       <div>
         <div>
@@ -110,9 +98,9 @@ class Login extends Component {
               <div class="info">
                 <Segment color="blue">
                   {" "}
-                  User: Username = David
+                  User: Username = david
                   <br />
-                  <br /> Admin: Username = Steve
+                  <br /> Admin: Username = admin
                 </Segment>
               </div>
               <br />

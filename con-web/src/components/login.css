@@ -1,6 +1,10 @@
 div.login {
-  width: 50%;
+  width: 30%;
   margin: auto;
+  top: 50%;
+  bottom: 50%;
+  left: 0;
+  right: 0;
 }
 div.info {
   width: 20%;

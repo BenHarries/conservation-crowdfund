@@ -8,6 +8,7 @@ import Features from "./features";
 import MyCauses from "./landing";
 import Turtle from "./project";
 import SearchBar from "./searchbar";
+import "./newnav.css";
 
 const API =
   "http://apiv3.iucnredlist.org/api/v3/species/loxodonta%20africana?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
@@ -113,7 +114,9 @@ export default class NavBar extends Component {
                 </Segment>
               </div>
             </div>
-            <Features />
+            <div class="restrict">
+              <Features />
+            </div>
           </Segment>
         )}
       </div>

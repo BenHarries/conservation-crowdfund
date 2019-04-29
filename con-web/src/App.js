@@ -61,7 +61,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Menu stackable>
+          <Menu stackable pointing secondary>
             {!isAlreadyAuthenticated ? (
               " "
             ) : (
@@ -73,7 +73,7 @@ class App extends Component {
               // </div>
               <Link to={"/mycauses"} className="nav-link">
                 <Menu.Item
-                  name="upcomingEvents"
+                  name="mycauses"
                   active={activeItem === "upcomingEvents"}
                   onClick={this.handleItemClick}
                 >
@@ -85,10 +85,11 @@ class App extends Component {
                     <span>{localStorage.getItem("Username")}'s Causes</span> */}
                     <Header as="h3">
                       <Image
+                        size="mini"
                         circular
                         src={localStorage.getItem("ProfileImageUrl")}
                       />{" "}
-                      {localStorage.getItem("Username")}'s Causes
+                      My Causes
                     </Header>
                   </div>
                 </Menu.Item>
@@ -99,11 +100,11 @@ class App extends Component {
             ) : (
               <Link to={"/featured_causes"} className="nav-link">
                 <Menu.Item
-                  name="editorials"
+                  name="causes"
                   active={activeItem === "editorials"}
                   onClick={this.handleItemClick}
                 >
-                  <Header as="h5" icon="like" content="Featured Causes" />
+                  <Header as="h3" icon="like" content="Featured Causes" />
                 </Menu.Item>
               </Link>
             )}
@@ -112,38 +113,42 @@ class App extends Component {
             ) : (
               <Link to={"/admin"} className="nav-link">
                 <Menu.Item
-                  name="reviews"
+                  name="admin"
                   active={activeItem === "reviews"}
                   onClick={this.handleItemClick}
                 >
-                  <Header as="h5" icon="user" content="Admin" />
+                  <Header as="h3" icon="user" content="Admin" />
                 </Menu.Item>
               </Link>
             )}
             {isAlreadyAuthenticated ? (
               " "
             ) : (
-              <Link to={"/"} className="nav-link">
-                <Menu.Item
-                  name="Login"
-                  active={activeItem === "upcomingEvents"}
-                  onClick={this.handleItemClick}
-                >
+              <Menu.Item
+                name="Login"
+                active={activeItem === "upcomingEvents"}
+                onClick={this.handleItemClick}
+              >
+                <Link to={"/"} className="nav-link">
                   {/* {users.map(user => (
                   <p key={user.id}>{user.username}'s Account</p>
                 ))}{" "} */}
                   Login
-                </Menu.Item>
-              </Link>
+                </Link>
+              </Menu.Item>
             )}
             {!isAlreadyAuthenticated ? (
               " "
             ) : (
-              <Link to={"/"} className="nav-link">
-                <Menu.Item onClick={this.handleLogout}>
-                  Logout {localStorage.getItem("Username")}
-                </Menu.Item>
-              </Link>
+              <Menu.Menu position="right">
+                <Link to={"/"} className="nav-link">
+                  <Menu.Item onClick={this.handleLogout}>
+                    <Header as="h3" icon="user">
+                      Logout {localStorage.getItem("Username")}
+                    </Header>
+                  </Menu.Item>
+                </Link>
+              </Menu.Menu>
             )}
           </Menu>
 

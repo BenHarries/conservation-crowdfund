@@ -151,7 +151,7 @@ class Feature extends Component {
 
     console.log(Linker);
     return (
-      <Card id={key}>
+      <Card id={key} raised>
         <Image src={image} />
 
         <Card.Content>

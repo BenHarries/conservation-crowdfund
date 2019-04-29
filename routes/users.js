@@ -6,40 +6,43 @@ var users = [
     username: "David",
     causes: ["Turtle"],
     profile_pic:
-      "https://hips.hearstapps.com/digitalspyuk.cdnds.net/17/16/1492536273-david-attenborough.jpg?crop=0.694xw:1.00xh;0.160xw,0&resize=480:*",
+      "http://www.jakeblanchard.co.uk/Images/Archive/attenborough.jpg",
     secret: "ksdjncaksjbciadcn"
   },
   {
     id: 2,
     username: "Steve",
     causes: ["Giant Panda"],
-    profile_pic:
-      "https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/52283880_10205056588131613_653197111914921984_o.jpg?_nc_cat=107&_nc_ht=scontent-lhr3-1.xx&oh=b2f88aa6486ac8bd6c11541c46cabed9&oe=5D2DDD51",
-    secret: "sjkdfnkjasbssdn"
+    profile_pic: "https://semantic-ui.com/images/avatar/large/joe.jpg",
+    secret: "ksdjncaksjbciadcn"
   },
   {
     id: 3,
     username: "Lucy",
     causes: ["Pangolin"],
-    profile_pic:
-      "https://cdn.shopify.com/s/files/1/2486/7062/files/RWL_04122017-SHOT-11-0377-1_CJH_2048x.jpg?v=1515492906",
+    profile_pic: "https://semantic-ui.com/images/avatar2/large/rachel.png",
     secret: "ksdjncaksjbciadcn"
   },
   {
     id: 4,
     username: "Jane",
     causes: ["Giraffe"],
-    profile_pic:
-      "https://i.pinimg.com/564x/ea/bf/d2/eabfd23d706d0f5fac29e84102964ec6.jpg",
+    profile_pic: "https://semantic-ui.com/images/avatar2/large/kristy.png",
     secret: "ksdjncaksjbciadcn"
   },
   {
     id: 5,
     username: "Alex",
     causes: ["Mongoose"],
-    profile_pic:
-      "http://footage.framepool.com/shotimg/qf/330879530-red-square-moscow-cap-hat-face.jpg",
-    secret: "ksdjncaksjbciadcn"
+    profile_pic: "https://semantic-ui.com/images/avatar2/large/matthew.png",
+    secret: "sjkdfnkjasbssdn"
+  },
+  {
+    id: 6,
+    username: "admin",
+    causes: ["Mongoose"],
+    profile_pic: "https://semantic-ui.com/images/avatar/large/steve.jpg",
+    secret: "sjkdfnkjasbssdn"
   }
 ];
 
@@ -54,17 +57,17 @@ router.get("/:username", function(req, res, next) {
   console.log(id_of_item.username);
 
   var user = users.filter(user => {
-    return user.username === id_of_item.username;
+    return user.username.toLowerCase() === id_of_item.username.toLowerCase();
   });
 
   if (isEmpty(user)) {
     console.log("there is no user with this name");
-    res.status(400);
+    res.status(400); //should make there be a catch
     res.json({
       message: "No user with this name",
       error: "No user with this name"
     });
-    // Object is empty (Would return true in this example)
+    // Object is empty
   } else {
     console.log("there is a user with this name");
     res.json(user);
@@ -78,10 +81,10 @@ router.get("/:username", function(req, res, next) {
 
 router.post("/login", function(req, res, next) {
   var id_of_item = req.body;
-  console.log(id_of_item.username);
+  console.log(id_of_item.username.toLowerCase());
 
   var user = users.filter(user => {
-    return user.username === id_of_item.username;
+    return user.username.toLowerCase() === id_of_item.username.toLowerCase();
   });
 
   if (isEmpty(user)) {
@@ -91,7 +94,7 @@ router.post("/login", function(req, res, next) {
       message: "No user with this name",
       error: "No user with this name"
     });
-    // Object is empty (Would return true in this example)
+    // Object is empty
   } else {
     console.log("there is a user with this name");
     res.json(user);
@@ -101,8 +104,9 @@ router.post("/login", function(req, res, next) {
 
 router.post("/update_cause", function(req, res, next) {
   var update = req.body;
-  var causes_appending_to = users.find(usr => usr.username === update.user)
-    .causes;
+  var causes_appending_to = users.find(
+    usr => usr.username.toLowerCase() === update.user.toLowerCase()
+  ).causes;
 
   if (!arrayContains(update.cause_to_add, causes_appending_to)) {
     causes_appending_to.push(update.cause_to_add);
