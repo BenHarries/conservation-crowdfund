@@ -46,6 +46,9 @@ let Admin_Token = "sjkdfnkjasbssdn";
 
 router.get("/", function(req, res, next) {
   res.json(featured_causes);
+  res.status(200);
+  // res.headers.set("Content-Type", "application/json");
+  console.log("yeah nice one", res.headers);
 });
 
 // router.get("/:id", function(req, res) {
