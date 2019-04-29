@@ -119,28 +119,15 @@ describe("Test a Specific Feature Info GET (Content/Response Status)", () => {
 
 describe("Test a Specific Feature Info GET (Content/Response Status)", () => {
   test("Response should have Content Type of application/json", async () => {
-    // var  = 300;
-    fetch("http://localhost:3001/featured_causes/desired/Turtle")
-      // .then(user => console.log("resss", user, Array.isArray(user)))
-      .then(response =>
+    fetch("http://localhost:3001/featured_causes/desired/Turtle").then(
+      response =>
         expect(
-          ////SEE IF THIS ONE HAS JSON RESPONSE
           response.headers.get("content-type").indexOf("application/json") !==
-            -1
+            -1 // THIS WILL BE FAlSE IF IT IS NOT APPLICATION/JSON
         ).toBe(true)
-      );
-    // .catch(err => expect(err.status).toBe(300));
+    );
   });
 });
 
 // Test For :
-// Authorisation
-
-// describe("Test a 200", () => {
-//   test("It should respond with a 200 status", async () => {
-//     // var  = 300;
-//     fetch("http://localhost:3001/users") // console.log("!!!!!!!!!!!!!!!!!", response);
-//       .then(res => expect(res.status).toBe(200))
-//       .catch(err => expect(err.status).toBe(200));
-//   });
-// });
+// Authorisation on POST
