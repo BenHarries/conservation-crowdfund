@@ -87,7 +87,9 @@ router.post("/", function(req, res) {
   console.log("UserToken", token);
   if (token === Admin_Token) {
     featured_causes.unshift(req.body);
+    res.status(200);
   } else {
+    console.log("wrong token");
     res.status(403);
   }
 });

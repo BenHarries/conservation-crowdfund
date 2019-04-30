@@ -45,7 +45,7 @@ var users = [
   {
     id: 6,
     username: "admin",
-    causes: ["Mongoose"],
+    causes: ["Blue Whale"],
     profile_pic: "https://semantic-ui.com/images/avatar/large/steve.jpg",
     secret: "sjkdfnkjasbssdn",
     password: "admin"
@@ -126,6 +126,22 @@ router.post("/update_cause", function(req, res, next) {
   console.log("yes");
 });
 
+router.post("/update_cause_remove", function(req, res, next) {
+  console.log("yes");
+  var update = req.body;
+  var causes_deleting_from = users.find(
+    usr => usr.username.toLowerCase() === update.user.toLowerCase()
+  ).causes;
+
+  console.log(causes_deleting_from);
+
+  removeA(causes_deleting_from, update.cause_to_delete);
+
+  console.log(causes_deleting_from);
+  console.log(users);
+  console.log("delete");
+});
+
 router.post("/new_user", function(req, res, next) {
   var update = req.body;
   var token = req.body.token;
@@ -150,6 +166,20 @@ function isEmpty(obj) {
     if (obj.hasOwnProperty(key)) return false;
   }
   return true;
+}
+
+function removeA(arr) {
+  var what,
+    a = arguments,
+    L = a.length,
+    ax;
+  while (L > 1 && arr.length) {
+    what = a[--L];
+    while ((ax = arr.indexOf(what)) !== -1) {
+      arr.splice(ax, 1);
+    }
+  }
+  return arr;
 }
 
 module.exports = router;

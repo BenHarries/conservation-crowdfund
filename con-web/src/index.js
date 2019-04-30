@@ -1,15 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 require("dotenv").config();
-
-var sectionStyle = {
-  width: "100%",
-  height: "100%",
-  backgroundImage: `url("./images/Split.png")`
-};
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

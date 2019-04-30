@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import {
-  Image,
-  Card,
-  Icon,
-  Button,
-  Progress,
-  Header,
-  Label
-} from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
+import { Image, Card, Icon, Button, Header } from "semantic-ui-react";
 import "./feature.css";
 
 const API1 = "http://apiv3.iucnredlist.org/api/v3/species/";
@@ -28,6 +19,7 @@ class Feature extends Component {
       category: ""
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
 
   increment = () =>
@@ -120,6 +112,42 @@ class Feature extends Component {
     }
   }
 
+  handleDeleteClick() {
+    console.log("delete click", this.state);
+    var a_data = {
+      user: localStorage.getItem("Username"),
+      cause_to_delete: this.state.species
+    };
+    console.log("delete click", a_data);
+
+    fetch("/users/update_cause_remove", {
+      method: "POST",
+
+      body: JSON.stringify(a_data), // data can be `string` or {object}!
+      headers: { "Content-Type": "application/json" }
+    });
+
+    fetch(fetch_current_user)
+      .then(res => res.json())
+      .then(
+        users => this.setState({ current_user_causes: users[0].causes }),
+        users => console.log("123", users[0].causes),
+        console.log("123", this.state),
+        users => (window.AllCauses = users[0].causes)
+      );
+    function arrayContains(needle, arrhaystack) {
+      return arrhaystack.indexOf(needle) > -1;
+    }
+
+    if (
+      this.state.current_user_causes &&
+      arrayContains(this.state.species, this.state.current_user_causes)
+    ) {
+      console.log("True in render", this.state.species);
+      // return true;
+    }
+  }
+
   arrayContains(needle, arrhaystack) {
     return arrhaystack.indexOf(needle) > -1;
   }
@@ -131,7 +159,14 @@ class Feature extends Component {
     ) {
       console.log("True in render", this.state.species);
       return (
-        <Button compact basic small color="red" floated="right">
+        <Button
+          compact
+          basic
+          small
+          color="red"
+          floated="right"
+          onClick={this.handleDeleteClick}
+        >
           <Icon name="heart" />
           Like
         </Button>
@@ -161,10 +196,10 @@ class Feature extends Component {
     const { title } = this.props;
     const { image } = this.props;
     const category = this.state.category;
-    const { scientific_name } = this.state;
+    const { scientific_name } = this.props;
     const { user_who_added } = this.props;
     const slash = "/";
-    console.log("this cat", category);
+    console.log("this cat", this.state);
     const Linker = slash.concat(title);
     // function isAdded() {
 
@@ -181,7 +216,8 @@ class Feature extends Component {
 
         <Card.Content>
           <div class="category">{category}</div>{" "}
-          <Card.Header>{title}</Card.Header>{" "}
+          <Card.Header>{title}</Card.Header> <br />
+          <Card.Header as="h4">{scientific_name}</Card.Header>{" "}
           <Card.Meta>
             {/* <span className="date">
               by{" "}
@@ -197,8 +233,7 @@ class Feature extends Component {
         </Card.Content>
 
         <Card.Content extra>
-          {" "}
-          <Header>Created by: {user_who_added}</Header>
+          <Header as="h5">Created by: {user_who_added}</Header>
           <div>{added}</div>
         </Card.Content>
       </Card>

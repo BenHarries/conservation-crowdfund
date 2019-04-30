@@ -117,5 +117,27 @@ describe("Test a Specific Feature Info GET (Content/Response Status)", () => {
   });
 });
 
-// Test For :
-// Authorisation on POST
+// describe("Test a Specific Feature Info GET (Content/Response Status)", () => {
+//   test("Response should have Content Type of application/json", async () => {
+//     const data = {
+//       id: 2,
+//       species: "alpaca",
+//       image: "this.state.image",
+//       scientific_name: "this.state.scientific_name",
+//       token: "sjkdfnkjasbssdn",
+//       user_who_added: "right"
+//     };
+//     fetch("http://localhost:3001/featured_causes", {
+//       method: "POST", // or ‘PUT’
+
+//       body: JSON.stringify(data), // data can be `string` or {object}!
+//       headers: { "Content-Type": "application/json" }
+//     });
+//     // .then(res => res.text())
+//     // .then(res => console.log("Success:", res));
+
+//     // .catch(error => {
+//     //   expect(error).toBe(403);
+//     // });
+//   });
+// });

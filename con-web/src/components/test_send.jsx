@@ -20,10 +20,6 @@ export default class NewFeature extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    // console.log("id : " + this.state.id);
-    // console.log("species : " + this.state.species);
-    // console.log("image : " + this.state.image);
-
     const url = "/featured_causes";
 
     const data = {
