@@ -92,7 +92,15 @@ class MyCauses extends Component {
       console.log("these causes are", user_causes);
       features = user_causes.map(cause => {
         if (cause !== null) {
-          return <Feature title={cause.species} image={cause.image} />;
+          return (
+            <Feature
+              key={cause.id}
+              title={cause.species}
+              image={cause.image}
+              scientific_name={cause.scientific_name}
+              user_who_added={cause.user_who_added}
+            />
+          );
         }
       });
     }

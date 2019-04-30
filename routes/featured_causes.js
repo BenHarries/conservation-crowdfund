@@ -7,47 +7,54 @@ let featured_causes = [
     species: "Turtle",
     image:
       "http://2.bp.blogspot.com/-4dc4vkZLlGo/TWHh1qNIJSI/AAAAAAAAEfg/DBdScbOCEYE/s1600/vista-wallpaper-green-sea-turtle.jpg",
-    user_who_added: "Alex"
+    user_who_added: "Alex",
+    scientific_name: "Chelonia mydas"
   },
   {
     id: 2,
     species: "Giraffe",
     image: "https://retrieverman.files.wordpress.com/2012/05/giraffe.jpg",
-    user_who_added: "Steve"
+    user_who_added: "Steve",
+    scientific_name: "Giraffa camelopardalis"
   },
   {
     id: 3,
     species: "Giant Panda",
     image:
       "https://c402277.ssl.cf1.rackcdn.com/photos/11551/images/hero_small/Bernard_de_wetter_wwf_canon_113974.jpg?1462218465",
-    user_who_added: "David"
+    user_who_added: "David",
+    scientific_name: "Ailuropoda melanoleuca"
   },
   {
     id: 4,
     species: "Pangolin",
     image: "https://mscbcmnsep.files.wordpress.com/2018/02/blog-5.jpg?w=1190",
-    user_who_added: "Steve"
+    user_who_added: "Steve",
+    scientific_name: "Manis culionensis"
   },
   {
     id: 5,
     species: "Crested Tit",
     image:
       "http://voice.gardenbird.co.uk/wp-content/uploads/2017/05/Crested-tit-Lophophanes-cristatus.jpg",
-    user_who_added: "Jane"
+    user_who_added: "Jane",
+    scientific_name: "Lophophanes cristatus"
   },
   {
     id: 6,
     species: "Tiger",
     image:
       "https://previews.123rf.com/images/ewastudio/ewastudio1803/ewastudio180300105/98369124-tiger-in-forest-tiger-portrait.jpg",
-    user_who_added: "Steve"
+    user_who_added: "Steve",
+    scientific_name: "Panthera tigris"
   },
   {
     id: 6,
     species: "Blue Whale",
     image:
       "https://rvalaska.co/wp-content/uploads/2016/02/humpback-whale-tour-alaska-cropped.jpg",
-    user_who_added: "Lucy"
+    user_who_added: "Lucy",
+    scientific_name: "Balaenoptera musculus"
   }
 ];
 

@@ -3,8 +3,9 @@ import { Image, Card, Icon, Button, Progress, Header } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import "./feature.css";
 
-const API =
-  "http://apiv3.iucnredlist.org/api/v3/species/loxodonta%20africana?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
+const API1 = "http://apiv3.iucnredlist.org/api/v3/species/";
+const API2 =
+  "?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
 
 const fetch_current_user = "users/" + localStorage.Username;
 console.log("now thats what", fetch_current_user);
@@ -15,7 +16,8 @@ class Feature extends Component {
     this.state = {
       species: this.props.title,
       added: false,
-      current_user_causes: []
+      current_user_causes: [],
+      category: ""
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -25,7 +27,10 @@ class Feature extends Component {
       percent: this.state.percent >= 100 ? 0 : this.state.percent + 20
     });
   componentDidMount() {
-    console.log("yeah yeah", API + "/" + this.state.species);
+    const split_name = this.props.scientific_name.split(" ");
+    console.log("this", split_name);
+    const API = API1.concat(split_name[0], "%20", split_name[1], API2);
+    console.log("THis is the API of dreams", API);
 
     fetch(API)
       .then(result => {
@@ -36,14 +41,15 @@ class Feature extends Component {
         }
       })
       .then(data => {
-        let category = data.result.map(pic => {
+        let category = data.result.map(species => {
           return (
             <p class="catagory-text">
-              <strong>{pic.category}</strong>
+              <strong>{species.category}</strong>
             </p>
           );
         });
         this.setState({ category: category });
+        console.log("this state", category, this.state.category);
       });
 
     fetch(fetch_current_user)
@@ -137,9 +143,11 @@ class Feature extends Component {
     const { key } = this.props;
     const { title } = this.props;
     const { image } = this.props;
-    const { category } = this.props;
+    const category = this.state.category;
+    const { scientific_name } = this.state;
     const { user_who_added } = this.props;
     const slash = "/";
+    console.log("this cat", category);
     const Linker = slash.concat(title);
     // function isAdded() {
 

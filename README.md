@@ -2,9 +2,17 @@
 
 Building a full stack javascript web app using react.js and node.js
 
-# How to Use
+# How to Run
+
+## How to
 
 cd into react-backend
+
+`npm start`
+
+runs server _and_ client side
+
+# How to test
 
 ## How to run eslint
 
@@ -14,20 +22,16 @@ cd into react-backend
 
 `npm run test`
 
-## How to run server and client side
+# How to Use
 
-`npm start`
-
-## Whilst running
-
-### Entities
+## Entities
 
 There are two entities:
 
 - Users
 - Causes
 
-### Pages
+## Pages
 
 After logging in with either the user or admin credentials there are 3 pages available from the navbar are:
 

@@ -5,7 +5,13 @@ import { Redirect } from "react-router-dom";
 export default class NewFeature extends Component {
   constructor() {
     super();
-    this.state = { id: "", species: "", image: "", added: false };
+    this.state = {
+      id: "",
+      species: "",
+      image: "",
+      added: false,
+      scientific_name: ""
+    };
   }
 
   handleChange = event => {
@@ -24,6 +30,7 @@ export default class NewFeature extends Component {
       id: this.state.id,
       species: this.state.species,
       image: this.state.image,
+      scientific_name: this.state.scientific_name,
       token: localStorage.getItem("token"),
       user_who_added: localStorage.getItem("Username")
     };
@@ -75,6 +82,13 @@ export default class NewFeature extends Component {
                 type="text"
                 name="image"
                 placeholder="Image URL"
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                fluid
+                type="text"
+                name="scientific_name"
+                placeholder="Scientific Name"
                 onChange={this.handleChange}
               />
               <Button type="submit" color="blue">

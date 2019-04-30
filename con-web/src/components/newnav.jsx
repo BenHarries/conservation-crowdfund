@@ -86,9 +86,6 @@ export default class NavBar extends Component {
     return token && token.length > 5;
   }
   render() {
-    const { activeItem } = this.state;
-    const { contextRef } = this.state;
-    const { users, isLoading, error } = this.state;
     var isAlreadyAuthenticated = this.isAuthenticated();
 
     // if (error) {
