@@ -20,6 +20,7 @@ export default class NewUser extends Component {
       id: this.state.id,
       username: this.state.username,
       profile_pic: this.state.profile_pic,
+      token: localStorage.getItem("token"),
       causes: this.state.causes
     };
     console.log("sending", data);
@@ -32,10 +33,10 @@ export default class NewUser extends Component {
     })
       .then(res => res.text())
       .then(res => console.log("Success:", res))
-
       .catch(error => console.error("Error:", error));
 
     this.setState({ added: true });
+    window.location.reload();
   };
 
   render() {

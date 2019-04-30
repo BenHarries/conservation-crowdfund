@@ -6,3 +6,8 @@ div.j {
 div.featuresHeading {
   padding: 6em;
 }
+
+div.search {
+  width: 30%;
+  margin: auto;
+}

@@ -42,14 +42,14 @@ let featured_causes = [
   },
   {
     id: 6,
-    species: "Tiger",
+    species: "Asian Tiger",
     image:
       "https://previews.123rf.com/images/ewastudio/ewastudio1803/ewastudio180300105/98369124-tiger-in-forest-tiger-portrait.jpg",
     user_who_added: "Steve",
     scientific_name: "Panthera tigris"
   },
   {
-    id: 6,
+    id: 7,
     species: "Blue Whale",
     image:
       "https://rvalaska.co/wp-content/uploads/2016/02/humpback-whale-tour-alaska-cropped.jpg",

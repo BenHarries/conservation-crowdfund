@@ -14,37 +14,6 @@ const API =
   "http://apiv3.iucnredlist.org/api/v3/species/loxodonta%20africana?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
 // const API = "https://randomuser.me/api/?results=500";
 
-let featured_causes = [
-  {
-    id: 1,
-    species: "Turtle",
-    image:
-      "http://2.bp.blogspot.com/-4dc4vkZLlGo/TWHh1qNIJSI/AAAAAAAAEfg/DBdScbOCEYE/s1600/vista-wallpaper-green-sea-turtle.jpg"
-  },
-  {
-    id: 2,
-    species: "Giraffe",
-    image: "https://retrieverman.files.wordpress.com/2012/05/giraffe.jpg"
-  },
-  {
-    id: 3,
-    species: "Mongoose",
-    image:
-      "https://www.marwell.org.uk/media/images/full/yellow_mongoose_shutterstock_296510669.jpg"
-  }
-];
-
-const routing = (
-  <Router>
-    <Switch>
-      {featured_causes.map(cause => {
-        console.log("aaaaa", cause);
-        return <Route exact path={"/" + cause.species} component={Turtle} />;
-      })}
-    </Switch>
-  </Router>
-);
-
 export default class NavBar extends Component {
   state = { users: [], isLoading: false, error: null, pictures: [] };
 
@@ -100,21 +69,18 @@ export default class NavBar extends Component {
         {!isAlreadyAuthenticated ? (
           <Redirect to={{ pathname: "/" }} />
         ) : (
-          <Segment>
+          <div>
             <div class="ui one column stackable center aligned page grid">
               <div class="column six wide">
                 <Header as="h1" textAlign="center">
                   Featured Causes
                 </Header>{" "}
-                <Segment textAlign="center" color="blue">
-                  <SearchBar />
-                </Segment>
               </div>
             </div>
             <div class="restrict">
               <Features />
             </div>
-          </Segment>
+          </div>
         )}
       </div>
     );

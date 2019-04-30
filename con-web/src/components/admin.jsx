@@ -7,7 +7,8 @@ import {
   Header,
   Icon,
   Segment,
-  Message
+  Message,
+  GridColumn
 } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 
@@ -197,70 +198,73 @@ class Admin extends Component {
                     </Header.Subheader>
                   </Header>{" "}
                 </div>
+
                 <Grid columns={2} divided relaxed="very" centered stackable>
                   <Grid.Row verticalAlign="middle">
                     <Grid.Column textAlign="center" verticalAlign="middle">
-                      <Segment.Group horizontal padded>
-                        <Segment>
-                          <NewFeature />
-                        </Segment>
-                        <Segment>
-                          <NewUser />
-                        </Segment>
-                      </Segment.Group>
+                      <NewUser />
                     </Grid.Column>
                     <Grid.Column textAlign="center" verticalAlign="middle">
-                      <Grid.Row verticalAlign="middle">
-                        <div class="ui stackable center aligned page grid">
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <Segment>
-                            Search a User for their info e.g David{" "}
-                            <Form onSubmit={this.handleUserSubmit} centered>
-                              <Form.Input
-                                fluid
-                                icon="search"
-                                width={30}
-                                type="text"
-                                name="id"
-                                placeholder="Name of User"
-                                onChange={this.handleChange}
-                              />
-                            </Form>
-                            Search a Cause for their info e.g Turtle{" "}
-                            <Form onSubmit={this.handleFeatureSubmit} centered>
-                              <Form.Input
-                                fluid
-                                icon="search"
-                                width={30}
-                                type="text"
-                                name="feature"
-                                placeholder="Name of Cause"
-                                onChange={this.handleChange}
-                              />
-                            </Form>
-                          </Segment>
-                        </div>
-                      </Grid.Row>
-                      <br />
-                      <br />
-
-                      <Grid.Row verticalAlign="middle">
-                        {" "}
-                        {desired_user} {desired_cause}
-                      </Grid.Row>
+                      <NewFeature />
                     </Grid.Column>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                  </Grid.Row>
 
-                    <Grid.Column> </Grid.Column>
+                  <Grid.Row verticalAlign="middle">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <Grid.Column textAlign="center" verticalAlign="middle">
+                      <div class="ui stackable center aligned page grid">
+                        <Segment>
+                          Search a User for their info e.g David{" "}
+                          <Form onSubmit={this.handleUserSubmit} centered>
+                            <Form.Input
+                              fluid
+                              icon="search"
+                              width={30}
+                              type="text"
+                              name="id"
+                              placeholder="Name of User"
+                              onChange={this.handleChange}
+                            />
+                          </Form>
+                        </Segment>{" "}
+                      </div>
+                    </Grid.Column>
+                    <Grid.Column textAlign="center" verticalAlign="middle">
+                      <div class="ui stackable center aligned page grid">
+                        <Segment>
+                          Search a Cause for their info e.g Turtle{" "}
+                          <Form onSubmit={this.handleFeatureSubmit} centered>
+                            <Form.Input
+                              fluid
+                              icon="search"
+                              width={30}
+                              type="text"
+                              name="feature"
+                              placeholder="Name of Cause"
+                              onChange={this.handleChange}
+                            />
+                          </Form>
+                        </Segment>
+                      </div>
+                    </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row verticalAlign="middle">
+                    {desired_user} {desired_cause}
                   </Grid.Row>
                 </Grid>
                 <div class="ui stackable center aligned page grid">
-                  <br />
-                  <br />
-                  <br />
-
                   <List />
                 </div>
               </div>

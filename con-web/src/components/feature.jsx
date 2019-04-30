@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Image, Card, Icon, Button, Progress, Header } from "semantic-ui-react";
+import {
+  Image,
+  Card,
+  Icon,
+  Button,
+  Progress,
+  Header,
+  Label
+} from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import "./feature.css";
 
@@ -123,8 +131,9 @@ class Feature extends Component {
     ) {
       console.log("True in render", this.state.species);
       return (
-        <Button basic color="green" floated="right">
-          <Icon name="check" />{" "}
+        <Button compact basic small color="red" floated="right">
+          <Icon name="heart" />
+          Like
         </Button>
       );
       // return true;
@@ -132,8 +141,16 @@ class Feature extends Component {
       console.log("false");
 
       return (
-        <Button basic color="blue" floated="right" onClick={this.handleClick}>
-          <Icon name="add" />{" "}
+        <Button
+          compact
+          small
+          basic
+          color="black"
+          floated="right"
+          onClick={this.handleClick}
+        >
+          <Icon name="heart" />
+          Like
         </Button>
       );
     }

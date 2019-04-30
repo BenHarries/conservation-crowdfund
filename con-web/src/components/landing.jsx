@@ -82,9 +82,13 @@ class MyCauses extends Component {
     console.log("map if", user_causes);
     console.log("STATE", this.state);
     var features;
+    var no_causes;
     if (user_causes[0] == null) {
-      features = (
+      no_causes = (
         <div class="ui stackable center aligned page grid">
+          <br />
+          <br />
+          <br />
           <Header>You have not Liked any causes</Header>
         </div>
       );
@@ -116,12 +120,25 @@ class MyCauses extends Component {
           <div class="grid">
             {/* <Image src={localStorage.getItem("ProfileImageUrl")} /> */}
             <div class="ui one column stackable center aligned page grid">
+              <div class="ui one column stackable center aligned page grid">
+                <Image
+                  src={localStorage.getItem("ProfileImageUrl")}
+                  size="medium"
+                  circular
+                  centered
+                />
+              </div>
               <Header as="h1">
                 {localStorage.getItem("Username")}'s Causes
               </Header>
-              <Card.Group itemsPerRow={2} stackable>
-                {features}
-              </Card.Group>
+              <Grid>
+                <Grid.Row>
+                  <Card.Group itemsPerRow={2} stackable>
+                    {features}
+                  </Card.Group>
+                  {no_causes}
+                </Grid.Row>
+              </Grid>
             </div>
           </div>
         )}

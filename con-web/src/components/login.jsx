@@ -4,7 +4,13 @@ import { Redirect } from "react-router-dom";
 import "./login.css";
 
 class Login extends Component {
-  state = { id: "", username: "", current: "not logged in", errorMessage: "" };
+  state = {
+    id: "",
+    username: "",
+    password: "",
+    current: "not logged in",
+    errorMessage: ""
+  };
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -18,7 +24,8 @@ class Login extends Component {
 
     const data = {
       id: this.state.id,
-      username: this.state.username
+      username: this.state.username,
+      password: this.state.password
     };
 
     console.log("sending", data);
@@ -32,27 +39,33 @@ class Login extends Component {
       .then(result => result.json())
 
       .catch(error => {
-        console.log("error time", error);
+        if (!error.error) {
+          return new Promise(function(resolve) {
+            setTimeout(resolve, 1000);
+          }, this.setState({ now: true }));
+        }
         this.setState({ errorMessage: error });
         return;
       })
 
       .then(res => {
         this.setState({ current: res });
-        localStorage.setItem("token", res[0].secret);
-        console.log("yes i have the token");
-        localStorage.setItem("Username", this.state.current[0].username);
-        localStorage.setItem(
-          "ProfileImageUrl",
-          this.state.current[0].profile_pic
-        );
-        localStorage.setItem("user_id", this.state.current[0].id);
-        localStorage.setItem("user_causes", this.state.current[0].causes);
-        this.setState();
+        if (!res.error) {
+          localStorage.setItem("token", res[0].secret);
+          console.log("yes i have the token");
+          localStorage.setItem("Username", this.state.current[0].username);
+          localStorage.setItem(
+            "ProfileImageUrl",
+            this.state.current[0].profile_pic
+          );
+          localStorage.setItem("user_id", this.state.current[0].id);
+          localStorage.setItem("user_causes", this.state.current[0].causes);
+          this.setState();
 
-        var myNamespace = window.myNamespace || {};
-        myNamespace.Username = this.state.current[0].username;
-        myNamespace.Causes = this.state.current[0].causes;
+          var myNamespace = window.myNamespace || {};
+          myNamespace.Username = this.state.current[0].username;
+          myNamespace.Causes = this.state.current[0].causes;
+        }
       })
       .then(res => {
         return new Promise(
@@ -60,6 +73,7 @@ class Login extends Component {
             setTimeout(resolve, 1000);
           },
           this.setState({ now: true }),
+
           window.location.reload()
         );
       })
@@ -77,7 +91,6 @@ class Login extends Component {
 
   render() {
     console.log("Rendered Again", this.state);
-    const errorMessage = this.state.errorMessage;
     var isAlreadyAuthenticated = this.isAuthenticated();
     return (
       <div>
@@ -106,7 +119,16 @@ class Login extends Component {
                       placeholder="Username"
                       onChange={this.handleChange}
                     />
-                    <Button type="submit">Submit</Button> {errorMessage}
+                    <Form.Input
+                      fluid
+                      icon="user"
+                      type="text"
+                      name="password"
+                      placeholder="Password"
+                      onChange={this.handleChange}
+                    />
+                    <Button type="submit">Submit</Button>{" "}
+                    {this.state.current.message}
                   </Form>
                 </Segment>
               </div>

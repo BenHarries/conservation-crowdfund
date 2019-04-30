@@ -7,6 +7,7 @@ var users = [
     causes: ["Turtle"],
     profile_pic:
       "http://www.jakeblanchard.co.uk/Images/Archive/attenborough.jpg",
+    password: "user",
     secret: "ksdjncaksjbciadcn"
   },
   {
@@ -14,37 +15,43 @@ var users = [
     username: "Steve",
     causes: ["Giant Panda"],
     profile_pic: "https://semantic-ui.com/images/avatar/large/joe.jpg",
-    secret: "ksdjncaksjbciadcn"
+    secret: "ksdjncaksjbciadcn",
+    password: "user"
   },
   {
     id: 3,
     username: "Lucy",
     causes: ["Pangolin"],
     profile_pic: "https://semantic-ui.com/images/avatar2/large/rachel.png",
-    secret: "ksdjncaksjbciadcn"
+    secret: "ksdjncaksjbciadcn",
+    password: "user"
   },
   {
     id: 4,
     username: "Jane",
     causes: ["Giraffe"],
     profile_pic: "https://semantic-ui.com/images/avatar2/large/kristy.png",
-    secret: "ksdjncaksjbciadcn"
+    secret: "ksdjncaksjbciadcn",
+    password: "user"
   },
   {
     id: 5,
     username: "Alex",
     causes: ["Mongoose"],
     profile_pic: "https://semantic-ui.com/images/avatar2/large/matthew.png",
-    secret: "sjkdfnkjasbssdn"
+    secret: "sjkdfnkjasbssdn",
+    password: "admin"
   },
   {
     id: 6,
     username: "admin",
     causes: ["Mongoose"],
     profile_pic: "https://semantic-ui.com/images/avatar/large/steve.jpg",
-    secret: "sjkdfnkjasbssdn"
+    secret: "sjkdfnkjasbssdn",
+    password: "admin"
   }
 ];
+let Admin_Token = "sjkdfnkjasbssdn";
 
 /* GET users listing. */
 router.get("/", function(req, res, next) {
@@ -84,15 +91,18 @@ router.post("/login", function(req, res, next) {
   console.log(id_of_item.username.toLowerCase());
 
   var user = users.filter(user => {
-    return user.username.toLowerCase() === id_of_item.username.toLowerCase();
+    return (
+      (user.username.toLowerCase() === id_of_item.username.toLowerCase()) &
+      (user.password === id_of_item.password)
+    );
   });
 
   if (isEmpty(user)) {
     console.log("there is no user with this name");
     res.status(400);
     res.json({
-      message: "No user with this name",
-      error: "No user with this name"
+      message: "Authentication Failed, Try Again",
+      error: "Authentication Failed"
     });
     // Object is empty
   } else {
@@ -118,11 +128,17 @@ router.post("/update_cause", function(req, res, next) {
 
 router.post("/new_user", function(req, res, next) {
   var update = req.body;
-  update.secret = "ksdjncaksjbciadcn";
-  users.push(update);
-  console.log("new user added", req.body);
-  console.log("yes");
-  res.status(200);
+  var token = req.body.token;
+
+  if (token === Admin_Token) {
+    update.secret = "ksdjncaksjbciadcn";
+    users.unshift(update);
+    console.log("new user added", req.body);
+    console.log("yes");
+    res.status(200);
+  } else {
+    res.status(403);
+  }
 });
 
 function arrayContains(needle, arrhaystack) {
