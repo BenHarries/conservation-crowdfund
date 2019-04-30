@@ -7,8 +7,8 @@ require("dotenv").config();
 
 var sectionStyle = {
   width: "100%",
-  height: "400px",
-  backgroundImage: `url(${Background})`
+  height: "100%",
+  backgroundImage: `url("./images/Split.png")`
 };
 
 class Section extends Component {
@@ -21,7 +21,7 @@ class Section extends Component {
   }
 }
 
-ReactDOM.render(Section, document.getElementById("root"));
+ReactDOM.render(<Section />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
