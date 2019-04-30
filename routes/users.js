@@ -68,7 +68,7 @@ router.post("/login", function(req, res, next) {
     console.log("there is no user with this name");
     res.status(401);
     res.json({
-      message: "Icorrect authentication, Try Again",
+      message: "Incorrect authentication, Reloading",
       error: "Incorrect authentication"
     });
     // Object is empty
