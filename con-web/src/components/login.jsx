@@ -16,8 +16,6 @@ class Login extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
   handleSubmit = event => {
-    const { history } = this.props;
-
     event.preventDefault();
 
     const url = "/users/login";
@@ -101,10 +99,11 @@ class Login extends Component {
             <div>
               <div class="info">
                 <Segment color="blue">
-                  {" "}
-                  User: Username = david
-                  <br />
-                  <br /> Admin: Username = admin
+                  <div class="alpha">
+                    User: Username = david | Password = user
+                    <br />
+                    <br /> Admin: Username = admin | Password = admin
+                  </div>
                 </Segment>
               </div>
               <br />

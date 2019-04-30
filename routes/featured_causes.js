@@ -64,16 +64,7 @@ router.get("/", function(req, res, next) {
   res.json(featured_causes);
   res.status(200);
   // res.headers.set("Content-Type", "application/json");
-  console.log("yeah nice one", res.headers);
 });
-
-// router.get("/:id", function(req, res) {
-//   const featured_cause = featured_causes.find(
-//     c => c.id === parseInt(req.params.id)
-//   );
-//   if (!featured_cause) res.status(404).send("The featured cause was not found");
-//   res.send(featured_cause);
-// });
 
 router.get("/desired/:featured_cause", function(req, res, next) {
   var id_of_item = req.params;
@@ -99,8 +90,6 @@ router.post("/", function(req, res) {
   } else {
     res.status(403);
   }
-
-  res.send("hello");
 });
 
 module.exports = router;

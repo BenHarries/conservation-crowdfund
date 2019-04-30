@@ -53,6 +53,32 @@ var users = [
 ];
 let Admin_Token = "sjkdfnkjasbssdn";
 
+router.post("/login", function(req, res, next) {
+  var id_of_item = req.body;
+  console.log(id_of_item.username.toLowerCase());
+
+  var user = users.filter(user => {
+    return (
+      (user.username.toLowerCase() === id_of_item.username.toLowerCase()) &
+      (user.password === id_of_item.password)
+    );
+  });
+
+  if (isEmpty(user)) {
+    console.log("there is no user with this name");
+    res.status(401);
+    res.json({
+      message: "Icorrect authentication, Try Again",
+      error: "Incorrect authentication"
+    });
+    // Object is empty
+  } else {
+    console.log("there is a user with this name");
+    res.json(user);
+    res.status(200);
+  }
+});
+
 /* GET users listing. */
 router.get("/", function(req, res, next) {
   res.json(users);
@@ -84,32 +110,6 @@ router.get("/:username", function(req, res, next) {
     // Object is NOT empty
   }
   console.log(user);
-});
-
-router.post("/login", function(req, res, next) {
-  var id_of_item = req.body;
-  console.log(id_of_item.username.toLowerCase());
-
-  var user = users.filter(user => {
-    return (
-      (user.username.toLowerCase() === id_of_item.username.toLowerCase()) &
-      (user.password === id_of_item.password)
-    );
-  });
-
-  if (isEmpty(user)) {
-    console.log("there is no user with this name");
-    res.status(400);
-    res.json({
-      message: "Authentication Failed, Try Again",
-      error: "Authentication Failed"
-    });
-    // Object is empty
-  } else {
-    console.log("there is a user with this name");
-    res.json(user);
-    res.status(200);
-  }
 });
 
 router.post("/update_cause", function(req, res, next) {

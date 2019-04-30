@@ -1,6 +1,5 @@
 var express = require("express");
 
-var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
 var featured_causes = require("./routes/featured_causes");
@@ -11,7 +10,6 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/featured_causes", featured_causes);
 

@@ -5,7 +5,7 @@ describe("Test a User GET (Content Type/Response Status)", () => {
     // var  = 300;
     fetch("http://localhost:3001/users")
       .then(res => expect(res.status).toBe(200))
-      .catch(err => expect(err.status).toBe(300));
+      .catch(err => expect(err.status).toBe(undefined));
   });
 });
 
@@ -15,7 +15,7 @@ describe("Test a User GET (Content Type/Response Status)", () => {
     fetch("http://localhost:3001/users")
       .then(res => res.json())
       .then(user => expect(Array.isArray(user)).toBe(true))
-      .catch(err => expect(err.status).toBe(300));
+      .catch(err => expect(err.status).toBe(undefined));
   });
 });
 
@@ -29,7 +29,7 @@ describe("Test a User GET (Content Type/Response Status)", () => {
             -1
         ).toBe(true)
       )
-      .catch(err => expect(err.status).toBe(300));
+      .catch(err => expect(err.status).toBe(undefined));
   });
 });
 
@@ -48,7 +48,7 @@ describe("Test a Specific User Info GET (Content/Response Status)", () => {
     fetch("http://localhost:3001/users/David")
       .then(res => res.json())
       .then(info => expect(info).toEqual(David_info))
-      .catch(err => expect(err.status).toBe(300));
+      .catch(err => expect(err.status).toBe(undefined));
   });
 });
 
@@ -62,7 +62,7 @@ describe("Test a Specific User Info GET (Content/Response Status)", () => {
             -1
         ).toBe(true)
       )
-      .catch(err => expect(err.status).toBe(300));
+      .catch(err => expect(err.status).toBe(undefined));
   });
 });
 
@@ -70,7 +70,7 @@ describe("Test a Featured_causes GET", () => {
   test("It should respond with a 200 status", async () => {
     fetch("http://localhost:3001/featured_causes")
       .then(res => expect(res.status).toBe(200))
-      .catch(err => expect(err.status).toBe(200));
+      .catch(err => expect(err.status).toBe(undefined));
   });
 });
 
@@ -83,7 +83,7 @@ describe("Test a Featured_causes GET", () => {
             -1
         ).toBe(true)
       )
-      .catch(err => expect(err.status).toBe(300));
+      .catch(err => expect(err.status).toBe(undefined));
   });
 });
 
@@ -101,7 +101,7 @@ describe("Test a Specific Feature Info GET (Content/Response Status)", () => {
     fetch("http://localhost:3001/featured_causes/desired/Pangolin")
       .then(res => res.json())
       .then(info => expect(info).toEqual(Pangolin_info))
-      .catch(err => expect(err.status).toBe(300));
+      .catch(err => expect(err.status).toBe(undefined));
   });
 });
 
