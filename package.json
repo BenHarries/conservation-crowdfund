@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "npm install --prefix con-web",
     "server": "PORT=3001 node ./bin/www",
     "client": "cd con-web && npm start",
     "start": "concurrently \"npm run server\" \"npm run client\"",
