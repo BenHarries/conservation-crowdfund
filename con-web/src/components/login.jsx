@@ -28,7 +28,7 @@ class Login extends Component {
 
     console.log("sending", data);
 
-    fetch(url, {
+    fetch("http://localhost:3001" + url, {
       method: "POST",
 
       body: JSON.stringify(data), // data can be `string` or {object}!

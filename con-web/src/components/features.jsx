@@ -11,7 +11,7 @@ class Features extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
   componentDidMount() {
-    fetch("/featured_causes")
+    fetch("http://localhost:3001/featured_causes")
       .then(res => res.json())
       .then(featured_causes => this.setState({ featured_causes }));
   }

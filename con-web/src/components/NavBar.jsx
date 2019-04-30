@@ -9,7 +9,7 @@ export default class Navbar extends Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    fetch("/users")
+    fetch("http://localhost:3001/users")
       .then(results => {
         if (results.ok) {
           return results.json();

@@ -14,7 +14,7 @@ export default class SearchBar extends Component {
     featured_causes: []
   };
   componentDidMount() {
-    fetch("/featured_causes")
+    fetch("http://localhost:3001/featured_causes")
       .then(res => res.json())
       .then(featured_causes => this.setState({ featured_causes }));
   }

@@ -7,7 +7,6 @@ const API2 =
   "?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
 
 const fetch_current_user = "users/" + localStorage.Username;
-console.log("now thats what", fetch_current_user);
 
 class Feature extends Component {
   constructor(props) {
@@ -32,7 +31,7 @@ class Feature extends Component {
     const API = API1.concat(split_name[0], "%20", split_name[1], API2);
     console.log("THis is the API of dreams", API);
 
-    fetch(API)
+    fetch("http://localhost:3001" + API)
       .then(result => {
         if (result.ok) {
           return result.json();
@@ -52,7 +51,7 @@ class Feature extends Component {
         console.log("this state", category, this.state.category);
       });
 
-    fetch(fetch_current_user)
+    fetch("http://localhost:3001" + fetch_current_user)
       .then(res => res.json())
       .then(
         users => this.setState({ current_user_causes: users[0].causes }),
@@ -84,14 +83,14 @@ class Feature extends Component {
       cause_to_add: this.state.species
     };
 
-    fetch("/users/update_cause", {
+    fetch("http://localhost:3001/users/update_cause", {
       method: "POST",
 
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers: { "Content-Type": "application/json" }
     });
 
-    fetch(fetch_current_user)
+    fetch("http://localhost:3001" + fetch_current_user)
       .then(res => res.json())
       .then(
         users => this.setState({ current_user_causes: users[0].causes }),
@@ -120,14 +119,14 @@ class Feature extends Component {
     };
     console.log("delete click", a_data);
 
-    fetch("/users/update_cause_remove", {
+    fetch("http://localhost:3001/users/update_cause_remove", {
       method: "POST",
 
       body: JSON.stringify(a_data), // data can be `string` or {object}!
       headers: { "Content-Type": "application/json" }
     });
 
-    fetch(fetch_current_user)
+    fetch("http://localhost:3001" + fetch_current_user)
       .then(res => res.json())
       .then(
         users => this.setState({ current_user_causes: users[0].causes }),

@@ -20,7 +20,7 @@ class MyCauses extends Component {
     const url = "/users/" + this.state.id;
     console.log("sending", url);
 
-    fetch(url)
+    fetch("http://localhost:3001" + url)
       .then(result => {
         if (result.ok) {
           return result.json();
@@ -31,27 +31,16 @@ class MyCauses extends Component {
       .then(user => this.setState({ user: user }));
 
     console.log(this.state);
-
-    // fetch(url, {
-    //   method: "POST", // or ‘PUT’
-
-    //   body: JSON.stringify(data), // data can be `string` or {object}!
-    //   headers: { "Content-Type": "application/json" }
-    // })
-    //   .then(res => res.text())
-    //   .then(res => console.log("Success:", res))
-
-    //   .catch(error => console.error("Error:", error));
   };
   componentDidMount() {
-    fetch("/users")
+    fetch("http://localhost:3001/users")
       .then(res => res.json())
       .then(users => this.setState({ users }));
-    fetch("/featured_causes")
+    fetch("http://localhost:3001/featured_causes")
       .then(res => res.json())
       .then(featured_causes => this.setState({ featured_causes }));
 
-    fetch(fetch_current_user)
+    fetch("http://localhost:3001" + fetch_current_user)
       .then(res => res.json())
       .then(
         users => this.setState({ current_user_causes: users[0].causes }),

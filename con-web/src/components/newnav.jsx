@@ -19,7 +19,7 @@ export default class NavBar extends Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    fetch("/users")
+    fetch("http://localhost:3001/users")
       .then(results => {
         if (results.ok) {
           return results.json();
@@ -29,7 +29,7 @@ export default class NavBar extends Component {
       })
       .then(users => this.setState({ users, isLoading: false }))
       .catch(error => this.setState({ error, isLoading: false }));
-    fetch(API)
+    fetch("http://localhost:3001" + API)
       .then(result => {
         if (result.ok) {
           return result.json();

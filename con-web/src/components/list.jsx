@@ -4,7 +4,7 @@ import { Card, Icon, Grid, Header } from "semantic-ui-react";
 class List extends Component {
   state = { users: [] };
   componentDidMount() {
-    fetch("/users")
+    fetch("http://localhost:3001/users")
       .then(res => res.json())
       .then(users => this.setState({ users }));
     console.log(this.state);

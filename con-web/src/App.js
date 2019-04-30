@@ -14,7 +14,7 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    fetch("/users")
+    fetch("http://localhost:3001/users")
       .then(results => {
         if (results.ok) {
           console.log("results", results.json());
@@ -26,17 +26,6 @@ class App extends Component {
       .then(users => console.log(users))
       .catch(error => this.setState({ error }));
     console.log("yesss", this.state);
-    // fetch("/featured_causes")
-    //   .then(results => {
-    //     if (results.ok) {
-    //       return results.json();
-    //     } else {
-    //       throw new Error("Something went wrong...");
-    //     }
-    //   })
-    //   .then(featured_causes => this.setState({ featured_causes }))
-    //   .catch(error => this.setState({ error }));
-    // console.log("featured?", this.state);
   }
   isAuthenticated() {
     const token = localStorage.getItem("token");
