@@ -68,30 +68,6 @@ class Login extends Component {
       .then(this.setState({ now: true }))
 
       .then(console.log("Alpha"));
-
-    //     console.log("yes i have the token");
-    //     localStorage.setItem("token", this.state.current[0].secret);
-    //     localStorage.setItem("Username", this.state.current[0].username);
-    //     localStorage.setItem(
-    //       "ProfileImageUrl",
-    //       this.state.current[0].profile_pic
-    //     );
-    //     localStorage.setItem("user_id", this.state.current[0].id);
-    //     localStorage.setItem("user_causes", this.state.current[0].causes);
-
-    //     var myNamespace = window.myNamespace || {};
-    //     myNamespace.Username = this.state.current[0].username;
-    //     myNamespace.Causes = this.state.current[0].causes;)
-    //   .then(res => res.json())
-    //   .then(res => console.log("the current users token is", res))
-    //   .then(res => {
-    //     this.setState({ current: res.body }, () => {
-    //       console.log(this.state, "Current User");
-    //     });
-    //   })
-    //   .catch(error => console.error("Error:", error));
-    // console.log("Login State", this.state);
-    // this.setState({ logged_in: true });
   };
 
   isAuthenticated() {

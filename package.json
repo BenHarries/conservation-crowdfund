@@ -3,10 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "PORT=3001 nodemon ./bin/www",
     "server": "PORT=3001 nodemon ./bin/www",
     "client": "cd con-web && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
     "test": "jest",
     "pretest": "eslint --ignore-path .gitignore ."
   },
