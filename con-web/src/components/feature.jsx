@@ -90,46 +90,31 @@ class Feature extends Component {
         users => this.setState({ current_user_causes: users[0].causes }),
         users => (window.AllCauses = users[0].causes)
       );
-    function arrayContains(needle, arrhaystack) {
-      return arrhaystack.indexOf(needle) > -1;
-    }
-
-    if (
-      this.state.current_user_causes &&
-      arrayContains(this.state.species, this.state.current_user_causes)
-    ) {
-      // return true;
-    }
   }
 
   handleDeleteClick() {
-    var a_data = {
-      user: localStorage.getItem("Username"),
-      cause_to_delete: this.state.species
-    };
-
-    fetch("/users/update_cause_remove", {
-      method: "POST",
-
-      body: JSON.stringify(a_data),
-      headers: { "Content-Type": "application/json" }
-    });
-
-    fetch(fetch_current_user)
-      .then(res => res.json())
-      .then(
-        users => this.setState({ current_user_causes: users[0].causes }),
-        users => (window.AllCauses = users[0].causes)
-      );
-    function arrayContains(needle, arrhaystack) {
-      return arrhaystack.indexOf(needle) > -1;
-    }
-
     if (
       this.state.current_user_causes &&
-      arrayContains(this.state.species, this.state.current_user_causes)
+      this.arrayContains(this.state.species, this.state.current_user_causes)
     ) {
-      // return true;
+      var a_data = {
+        user: localStorage.getItem("Username"),
+        cause_to_delete: this.state.species
+      };
+
+      fetch("/users/update_cause_remove", {
+        method: "POST",
+
+        body: JSON.stringify(a_data),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      fetch(fetch_current_user)
+        .then(res => res.json())
+        .then(
+          users => this.setState({ current_user_causes: users[0].causes }),
+          users => (window.AllCauses = users[0].causes)
+        );
     }
   }
 

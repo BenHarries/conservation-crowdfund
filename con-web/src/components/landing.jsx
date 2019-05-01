@@ -111,10 +111,12 @@ class MyCauses extends Component {
               </Header>
               <Grid>
                 <Grid.Row>
-                  <Card.Group itemsPerRow={2} stackable>
-                    {features}
-                  </Card.Group>
-                  {no_causes}
+                  <div class="ui one column stackable center aligned page grid">
+                    <Card.Group itemsPerRow={3} stackable centered>
+                      {features}
+                    </Card.Group>
+                    {no_causes}
+                  </div>
                 </Grid.Row>
               </Grid>
             </div>
