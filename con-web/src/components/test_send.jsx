@@ -30,7 +30,6 @@ export default class NewFeature extends Component {
       token: localStorage.getItem("token"),
       user_who_added: localStorage.getItem("Username")
     };
-    console.log("sending", data);
 
     fetch(url, {
       method: "POST", // or ‘PUT’
@@ -39,7 +38,6 @@ export default class NewFeature extends Component {
       headers: { "Content-Type": "application/json" }
     })
       .then(res => res.text())
-      .then(res => console.log("Success:", res))
 
       .catch(error => console.error("Error:", error));
 
