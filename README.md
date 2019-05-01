@@ -1,5 +1,3 @@
-Heroku 2
-
 # Table of Contents
 
 1. Condervation_causes API
@@ -32,6 +30,9 @@ will run server _and_ client side
 `npm run test`
 
 also running on _Heroku_ on https://ancient-stream-57707.herokuapp.com/ (Heroku dissalowed me to add any more changes as I had exceeded my free trial - so there is a few bugs still left in however most functionality remains, just click close on the errors if they pop up)
+
+![_VU_lnerable to extinction
+](images/demo_heroku.gif)
 
 # How to Use App
 
