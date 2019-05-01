@@ -1,6 +1,7 @@
 # Table of Contents
 
 1. Condervation_causes API
+   Written in react.js and node.js
 
 - 1.1. [Open Endpoints](##-Open-Endpoints)
 - 1.2. [Endpoints that require Authentication](##Endpoints-that-require-Authentication)
@@ -28,7 +29,7 @@ will run server _and_ client side
 
 `npm run test`
 
-also running on _Heroku_ on https://ancient-stream-57707.herokuapp.com/ (Heroku dissalowed me to add any more changes as I had exceeded my free trial - so there is a few bugs still left in)
+also running on _Heroku_ on https://ancient-stream-57707.herokuapp.com/ (Heroku dissalowed me to add any more changes as I had exceeded my free trial - so there is a few bugs still left in however most functionality remains, just click close on the errors if they pop up)
 
 # How to Use App
 
