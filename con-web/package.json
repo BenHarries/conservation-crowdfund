@@ -18,7 +18,6 @@
     "eject": "react-scripts eject",
     "client": "cd con-web && npm start"
   },
-  "proxy": "https://cors-anywhere.herokuapp.com/",
   "eslintConfig": {
     "extends": "react-app"
   },
