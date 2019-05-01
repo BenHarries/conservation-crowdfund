@@ -28,6 +28,8 @@ will run server _and_ client side
 
 `npm run test`
 
+also running on _Heroku_ on https://ancient-stream-57707.herokuapp.com/ (Heroku dissalowed me to add any more changes as I had exceeded my free trial - so there is a few bugs still left in)
+
 # How to Use App
 
 ## Entities
