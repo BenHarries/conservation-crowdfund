@@ -240,6 +240,8 @@
 
 // export default Feature;
 
+//Bottom
+
 import React, { Component } from "react";
 import { Image, Card, Icon, Button, Header } from "semantic-ui-react";
 import "./feature.css";
