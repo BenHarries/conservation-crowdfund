@@ -11,9 +11,9 @@
 
 # How to Run
 
-## How to
-
 once in root folder (`cd react-backend`)
+
+`npm install` (this does a post intall on react subfolder dependencies)
 
 `npm start`
 
