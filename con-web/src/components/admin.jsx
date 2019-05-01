@@ -1,15 +1,5 @@
 import React, { Component } from "react";
-import {
-  Card,
-  Form,
-  Grid,
-  Divider,
-  Header,
-  Icon,
-  Segment,
-  Message,
-  GridColumn
-} from "semantic-ui-react";
+import { Card, Form, Grid, Header, Icon, Segment } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 
 import "./admin.css";
@@ -26,7 +16,6 @@ class Admin extends Component {
     event.preventDefault();
 
     const url = "/users/" + this.state.id;
-    console.log("sending", url);
 
     fetch(url)
       .then(result => {
@@ -37,26 +26,12 @@ class Admin extends Component {
         }
       })
       .then(user => this.setState({ user: user }));
-
-    console.log(this.state);
-
-    // fetch(url, {
-    //   method: "POST", // or ‘PUT’
-
-    //   body: JSON.stringify(data), // data can be `string` or {object}!
-    //   headers: { "Content-Type": "application/json" }
-    // })
-    //   .then(res => res.text())
-    //   .then(res => console.log("Success:", res))
-
-    //   .catch(error => console.error("Error:", error));
   };
 
   handleFeatureSubmit = event => {
     event.preventDefault();
 
     const url = "/featured_causes/desired/" + this.state.feature;
-    console.log("sending", url);
 
     fetch(url)
       .then(result => {
@@ -67,19 +42,6 @@ class Admin extends Component {
         }
       })
       .then(desired_feature => this.setState({ desired_feature }));
-
-    console.log("STATE OF STATE", this.state);
-
-    // fetch(url, {
-    //   method: "POST", // or ‘PUT’
-
-    //   body: JSON.stringify(data), // data can be `string` or {object}!
-    //   headers: { "Content-Type": "application/json" }
-    // })
-    //   .then(res => res.text())
-    //   .then(res => console.log("Success:", res))
-
-    //   .catch(error => console.error("Error:", error));
   };
   componentDidMount() {
     fetch("/featured_causes")
@@ -160,14 +122,7 @@ class Admin extends Component {
           <br />
         </div>
       );
-      return (
-        <Card
-          centered
-          // meta={<Header>{cause}</Header>}
-          image={cause.image}
-          description={user_info}
-        />
-      );
+      return <Card centered image={cause.image} description={user_info} />;
     });
 
     return (

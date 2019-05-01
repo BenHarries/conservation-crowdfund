@@ -17,26 +17,12 @@ class App extends Component {
     fetch("/users")
       .then(results => {
         if (results.ok) {
-          console.log("results", results.json());
           return results.json();
         } else {
           throw new Error("Something went wrong...");
         }
       })
-      .then(users => console.log(users))
       .catch(error => this.setState({ error }));
-    console.log("yesss", this.state);
-    // fetch("/featured_causes")
-    //   .then(results => {
-    //     if (results.ok) {
-    //       return results.json();
-    //     } else {
-    //       throw new Error("Something went wrong...");
-    //     }
-    //   })
-    //   .then(featured_causes => this.setState({ featured_causes }))
-    //   .catch(error => this.setState({ error }));
-    // console.log("featured?", this.state);
   }
   isAuthenticated() {
     const token = localStorage.getItem("token");
@@ -50,8 +36,6 @@ class App extends Component {
     localStorage.setItem("user_id", "");
     localStorage.setItem("user_causes", "");
     window.location.reload();
-
-    console.log("remove token");
   }
 
   render() {
@@ -65,12 +49,6 @@ class App extends Component {
             {!isAlreadyAuthenticated ? (
               " "
             ) : (
-              // <div class="ui stackable center aligned page grid">
-              //   <Header as="h1" icon Centered>
-              //     <Icon name="window close" color="red" />
-              //     Login to see your causes
-              //   </Header>
-              // </div>
               <Link to={"/mycauses"} className="nav-link">
                 <Menu.Item
                   name="mycauses"
@@ -161,15 +139,6 @@ class App extends Component {
             <Route exact path="/" component={Login} />
             <Route path="/featured_causes" component={NavBar} />
           </Switch>
-
-          {/* {featured_causes.map(cause => {
-              console.log("aaaaa", cause.species);
-              const compon = String.raw(cause.component);
-
-              return (
-                <Route exact path={xwx + cause.species} component={Turtle} />
-              );
-            })} */}
         </div>
       </Router>
     );
@@ -177,36 +146,3 @@ class App extends Component {
 }
 
 export default App;
-
-// import React, { Component } from "react";
-// import { Router, Route, BrowserRouter } from "react-router-dom";
-// import "semantic-ui-css/semantic.min.css";
-
-// import NavBar from "./components/newnav";
-// import Login from "./components/login";
-// import NewFeature from "./components/test_send";
-// import SearchBar from "./components/searchbar";
-// import MyCauses from "./components/landing";
-// import Admin from "./components/admin";
-// import Navbar from "./components/NavBar";
-
-// // import NavBar from "./components/newnav";
-
-// class App extends Component {
-//   render() {
-//     return (
-//       <React.Fragment>
-//         <BrowserRouter>
-//           <Router>
-//             <Navbar />
-//             {/* <Route exact path="/" component={NavBar} />
-//           <Route path="/MyCauses" component={MyCauses} />
-//           <Route path="/Admin" component={Admin} /> */}
-//           </Router>
-//         </BrowserRouter>
-//       </React.Fragment>
-//     );
-//   }
-// }
-
-// export default App;

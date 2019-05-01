@@ -68,7 +68,6 @@ router.get("/", function(req, res, next) {
 
 router.get("/desired/:featured_cause", function(req, res, next) {
   var id_of_item = req.params;
-  console.log("letsss", id_of_item);
 
   var feature = featured_causes.filter(cause => {
     return (
@@ -76,20 +75,15 @@ router.get("/desired/:featured_cause", function(req, res, next) {
     );
   });
 
-  console.log(feature);
-
   res.json(feature);
 });
 
 router.post("/", function(req, res) {
-  console.log("NEWFEATUREPOST", req.body);
   var token = req.body.token;
-  console.log("UserToken", token);
   if (token === Admin_Token) {
     featured_causes.unshift(req.body);
     res.status(200);
   } else {
-    console.log("wrong token");
     res.status(403);
   }
 });

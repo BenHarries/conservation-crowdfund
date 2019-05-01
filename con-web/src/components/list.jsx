@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Icon, Grid, Header } from "semantic-ui-react";
+import { Card, Icon, Header } from "semantic-ui-react";
 
 class List extends Component {
   state = { users: [] };
@@ -7,7 +7,6 @@ class List extends Component {
     fetch("/users")
       .then(res => res.json())
       .then(users => this.setState({ users }));
-    console.log(this.state);
   }
   render() {
     let desired_user = this.state.users.map(user => {

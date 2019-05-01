@@ -7,7 +7,6 @@ const API2 =
   "?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
 
 const fetch_current_user = "users/" + localStorage.Username;
-console.log("now thats what", fetch_current_user);
 
 class Feature extends Component {
   constructor(props) {
@@ -27,37 +26,34 @@ class Feature extends Component {
       percent: this.state.percent >= 100 ? 0 : this.state.percent + 20
     });
   componentDidMount() {
-    const split_name = this.props.scientific_name.split(" ");
-    console.log("this", split_name);
-    const API = API1.concat(split_name[0], "%20", split_name[1], API2);
-    console.log("THis is the API of dreams", API);
+    if (this.props.scientific_name) {
+      const split_name = this.props.scientific_name.split(" ");
+      const API = API1.concat(split_name[0], "%20", split_name[1], API2);
 
-    fetch(API)
-      .then(result => {
-        if (result.ok) {
-          return result.json();
-        } else {
-          throw new Error("Something went wrong...");
-        }
-      })
-      .then(data => {
-        let category = data.result.map(species => {
-          return (
-            <p class="catagory-text">
-              <strong>{species.category}</strong>
-            </p>
-          );
+      fetch(API)
+        .then(result => {
+          if (result.ok) {
+            return result.json();
+          } else {
+            throw new Error("Something went wrong...");
+          }
+        })
+        .then(data => {
+          let category = data.result.map(species => {
+            return (
+              <p class="catagory-text">
+                <strong>{species.category}</strong>
+              </p>
+            );
+          });
+          this.setState({ category: category });
         });
-        this.setState({ category: category });
-        console.log("this state", category, this.state.category);
-      });
+    }
 
     fetch(fetch_current_user)
       .then(res => res.json())
       .then(
         users => this.setState({ current_user_causes: users[0].causes }),
-        users => console.log("123", users[0].causes),
-        console.log("123", this.state),
 
         users => (window.AllCauses = users[0].causes)
       );
@@ -70,15 +66,12 @@ class Feature extends Component {
       this.state.current_user_causes &&
       arrayContains(this.state.species, this.state.current_user_causes)
     ) {
-      console.log("True in render", this.state.species);
       // return true;
     }
   }
 
   handleClick() {
-    // this.setState({ added: true });
     this.forceUpdate();
-    console.log("state", this.state);
     const data = {
       user: localStorage.getItem("Username"),
       cause_to_add: this.state.species
@@ -95,8 +88,6 @@ class Feature extends Component {
       .then(res => res.json())
       .then(
         users => this.setState({ current_user_causes: users[0].causes }),
-        users => console.log("123", users[0].causes),
-        console.log("123", this.state),
         users => (window.AllCauses = users[0].causes)
       );
     function arrayContains(needle, arrhaystack) {
@@ -107,23 +98,20 @@ class Feature extends Component {
       this.state.current_user_causes &&
       arrayContains(this.state.species, this.state.current_user_causes)
     ) {
-      console.log("True in render", this.state.species);
       // return true;
     }
   }
 
   handleDeleteClick() {
-    console.log("delete click", this.state);
     var a_data = {
       user: localStorage.getItem("Username"),
       cause_to_delete: this.state.species
     };
-    console.log("delete click", a_data);
 
     fetch("/users/update_cause_remove", {
       method: "POST",
 
-      body: JSON.stringify(a_data), // data can be `string` or {object}!
+      body: JSON.stringify(a_data),
       headers: { "Content-Type": "application/json" }
     });
 
@@ -131,8 +119,6 @@ class Feature extends Component {
       .then(res => res.json())
       .then(
         users => this.setState({ current_user_causes: users[0].causes }),
-        users => console.log("123", users[0].causes),
-        console.log("123", this.state),
         users => (window.AllCauses = users[0].causes)
       );
     function arrayContains(needle, arrhaystack) {
@@ -143,7 +129,6 @@ class Feature extends Component {
       this.state.current_user_causes &&
       arrayContains(this.state.species, this.state.current_user_causes)
     ) {
-      console.log("True in render", this.state.species);
       // return true;
     }
   }
@@ -157,7 +142,6 @@ class Feature extends Component {
       this.state.current_user_causes &&
       this.arrayContains(this.state.species, this.state.current_user_causes)
     ) {
-      console.log("True in render", this.state.species);
       return (
         <Button
           compact
@@ -173,8 +157,6 @@ class Feature extends Component {
       );
       // return true;
     } else {
-      console.log("false");
-
       return (
         <Button
           compact
@@ -198,18 +180,9 @@ class Feature extends Component {
     const category = this.state.category;
     const { scientific_name } = this.props;
     const { user_who_added } = this.props;
-    const slash = "/";
-    console.log("this cat", this.state);
-    const Linker = slash.concat(title);
-    // function isAdded() {
-
-    // }
 
     const added = this.isAdded();
 
-    // console.log(added);
-
-    console.log(Linker);
     return (
       <Card id={key} raised>
         <Image src={image} />
@@ -217,18 +190,7 @@ class Feature extends Component {
         <Card.Content>
           <div class="category">{category}</div>{" "}
           <Card.Header>{title}</Card.Header> <br />
-          <Card.Header as="h4">{scientific_name}</Card.Header>{" "}
-          <Card.Meta>
-            {/* <span className="date">
-              by{" "}
-              <NavLink to={Linker}>
-                <strong>
-                  <em>{title}</em>
-                </strong>
-              </NavLink>
-            </span> */}
-          </Card.Meta>
-          {/* Allows maping turtle nests and increses chance... */}
+          <Card.Header as="h4">{scientific_name}</Card.Header> <Card.Meta />
           <Card.Description> </Card.Description>
         </Card.Content>
 

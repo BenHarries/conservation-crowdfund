@@ -16,20 +16,6 @@ class Features extends Component {
       .then(featured_causes => this.setState({ featured_causes }));
   }
   render() {
-    let features = this.state.featured_causes.map(featured_cause => {
-      return (
-        <Feature
-          key={featured_cause.id}
-          title={featured_cause.species}
-          image={featured_cause.image}
-          scientific_name={featured_cause.scientific_name}
-          // category={this.state.category}
-          user_who_added={featured_cause.user_who_added}
-        />
-      );
-    });
-    console.log("STATE OF FEATUERS", this.state);
-
     var cause_name_search = this.state.cause_name;
     if (cause_name_search) {
       cause_name_search = cause_name_search.toLowerCase();
@@ -38,7 +24,7 @@ class Features extends Component {
     var filtered_featured = this.state.featured_causes.filter(
       featured_cause => {
         return (
-          featured_cause.species.toLowerCase().search(cause_name_search) != -1
+          featured_cause.species.toLowerCase().search(cause_name_search) !== -1
         );
       }
     );
@@ -50,16 +36,11 @@ class Features extends Component {
           title={featured_cause.species}
           image={featured_cause.image}
           scientific_name={featured_cause.scientific_name}
-          // category={this.state.category}
           user_who_added={featured_cause.user_who_added}
         />
       );
     });
 
-    console.log(
-      "STATE OF FEATUERS filtered_featured:",
-      filtered_features_cards
-    );
     return (
       <div>
         <div class="search">

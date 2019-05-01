@@ -1,13 +1,8 @@
 import React, { Component } from "react";
-import { Grid, Menu, Segment, Sticky, Header } from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Header } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 
 import Features from "./features";
-import MyCauses from "./landing";
-import Turtle from "./project";
-import SearchBar from "./searchbar";
 import "./newnav.css";
 
 const API =
@@ -56,14 +51,6 @@ export default class NavBar extends Component {
   }
   render() {
     var isAlreadyAuthenticated = this.isAuthenticated();
-
-    // if (error) {
-    //   return <p>{error.message}</p>;
-    // }
-
-    // if (isLoading) {
-    //   return <p>Loading...</p>;
-    // }
     return (
       <div>
         {!isAlreadyAuthenticated ? (

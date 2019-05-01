@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { Grid, Image, Card, Form, Button, Header } from "semantic-ui-react";
+import { Grid, Image, Card, Header } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
-// const GridExampleCelledInternally = () => (
 import "./landing.css";
 import Feature from "./feature";
 
 const fetch_current_user = "users/" + localStorage.Username;
-console.log("now thats what", fetch_current_user);
 
 class MyCauses extends Component {
   state = { users: [], featured_causes: [], user: [], current_user_causes: [] };
@@ -18,7 +16,6 @@ class MyCauses extends Component {
     event.preventDefault();
 
     const url = "/users/" + this.state.id;
-    console.log("sending", url);
 
     fetch(url)
       .then(result => {
@@ -29,19 +26,6 @@ class MyCauses extends Component {
         }
       })
       .then(user => this.setState({ user: user }));
-
-    console.log(this.state);
-
-    // fetch(url, {
-    //   method: "POST", // or ‘PUT’
-
-    //   body: JSON.stringify(data), // data can be `string` or {object}!
-    //   headers: { "Content-Type": "application/json" }
-    // })
-    //   .then(res => res.text())
-    //   .then(res => console.log("Success:", res))
-
-    //   .catch(error => console.error("Error:", error));
   };
   componentDidMount() {
     fetch("/users")
@@ -53,11 +37,7 @@ class MyCauses extends Component {
 
     fetch(fetch_current_user)
       .then(res => res.json())
-      .then(
-        users => this.setState({ current_user_causes: users[0].causes }),
-        users => console.log("1234", users[0].causes),
-        console.log("123", this.state)
-      );
+      .then(users => this.setState({ current_user_causes: users[0].causes }));
   }
 
   arrayContains(needle, arrhaystack) {
@@ -70,6 +50,7 @@ class MyCauses extends Component {
   }
   render() {
     var all_causes = this.state.featured_causes;
+    // eslint-disable-next-line
     var user_causes = all_causes.map(cause => {
       if (this.arrayContains(cause.species, this.state.current_user_causes)) {
         return cause;
@@ -78,9 +59,7 @@ class MyCauses extends Component {
     user_causes = user_causes.filter(function(element) {
       return element !== undefined;
     });
-    console.log("gggg", all_causes);
-    console.log("map if", user_causes);
-    console.log("STATE", this.state);
+
     var features;
     var no_causes;
     if (user_causes[0] == null) {
@@ -93,7 +72,7 @@ class MyCauses extends Component {
         </div>
       );
     } else {
-      console.log("these causes are", user_causes);
+      // eslint-disable-next-line
       features = user_causes.map(cause => {
         if (cause !== null) {
           return (
@@ -109,7 +88,6 @@ class MyCauses extends Component {
       });
     }
 
-    console.log("yyyy", features);
     const isAlreadyAuthenticated = this.isAuthenticated();
     return (
       <div>

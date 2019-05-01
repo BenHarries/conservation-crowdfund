@@ -66,7 +66,7 @@ router.post("/login", function(req, res, next) {
 
   if (isEmpty(user)) {
     console.log("there is no user with this name");
-    res.status(401);
+    res.status(403);
     res.json({
       message: "Incorrect authentication, Reloading",
       error: "Incorrect authentication"
@@ -95,7 +95,7 @@ router.get("/:username", function(req, res, next) {
 
   if (isEmpty(user)) {
     console.log("there is no user with this name");
-    res.status(500); //should make there be a catch
+    res.status(400); //should make there be a catch
     res.json({
       message: "No user with this name",
       error: "No user with this name"
@@ -120,6 +120,8 @@ router.post("/update_cause", function(req, res, next) {
 
   if (!arrayContains(update.cause_to_add, causes_appending_to)) {
     causes_appending_to.push(update.cause_to_add);
+  } else {
+    res.status(400);
   }
 
   console.log(users);
