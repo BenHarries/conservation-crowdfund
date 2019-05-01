@@ -26,13 +26,9 @@ class Login extends Component {
       password: this.state.password
     };
 
-<<<<<<< HEAD
     console.log("sending", data);
 
     fetch("http://localhost:3001" + url, {
-=======
-    fetch(url, {
->>>>>>> d29e2f1675e53339665f40e924f16ba13bd6716f
       method: "POST",
 
       body: JSON.stringify(data), // data can be `string` or {object}!
