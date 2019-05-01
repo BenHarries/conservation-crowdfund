@@ -248,7 +248,11 @@ const API1 = "http://apiv3.iucnredlist.org/api/v3/species/";
 const API2 =
   "?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
 
+<<<<<<< HEAD
 const fetch_current_user = "/users/" + localStorage.Username;
+=======
+const fetch_current_user = "users/" + localStorage.Username;
+>>>>>>> d29e2f1675e53339665f40e924f16ba13bd6716f
 
 class Feature extends Component {
   constructor(props) {
@@ -344,14 +348,22 @@ class Feature extends Component {
         cause_to_delete: this.state.species
       };
 
+<<<<<<< HEAD
       fetch("http://localhost:3001/users/update_cause_remove", {
+=======
+      fetch("/users/update_cause_remove", {
+>>>>>>> d29e2f1675e53339665f40e924f16ba13bd6716f
         method: "POST",
 
         body: JSON.stringify(a_data),
         headers: { "Content-Type": "application/json" }
       });
 
+<<<<<<< HEAD
       fetch("http://localhost:3001" + fetch_current_user)
+=======
+      fetch(fetch_current_user)
+>>>>>>> d29e2f1675e53339665f40e924f16ba13bd6716f
         .then(res => res.json())
         .then(
           users => this.setState({ current_user_causes: users[0].causes }),

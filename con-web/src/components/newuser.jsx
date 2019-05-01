@@ -23,7 +23,6 @@ export default class NewUser extends Component {
       token: localStorage.getItem("token"),
       causes: this.state.causes
     };
-    console.log("sending", data);
 
     fetch("http://localhost:3001" + url, {
       method: "POST", // or ‘PUT’
@@ -32,7 +31,6 @@ export default class NewUser extends Component {
       headers: { "Content-Type": "application/json" }
     })
       .then(res => res.text())
-      .then(res => console.log("Success:", res))
       .catch(error => console.error("Error:", error));
 
     this.setState({ added: true });

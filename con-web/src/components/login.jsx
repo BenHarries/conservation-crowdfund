@@ -26,9 +26,13 @@ class Login extends Component {
       password: this.state.password
     };
 
+<<<<<<< HEAD
     console.log("sending", data);
 
     fetch("http://localhost:3001" + url, {
+=======
+    fetch(url, {
+>>>>>>> d29e2f1675e53339665f40e924f16ba13bd6716f
       method: "POST",
 
       body: JSON.stringify(data), // data can be `string` or {object}!
@@ -50,7 +54,6 @@ class Login extends Component {
         this.setState({ current: res });
         if (!res.error) {
           localStorage.setItem("token", res[0].secret);
-          console.log("yes i have the token");
           localStorage.setItem("Username", this.state.current[0].username);
           localStorage.setItem(
             "ProfileImageUrl",
@@ -75,11 +78,7 @@ class Login extends Component {
           window.location.reload()
         );
       })
-      // .then(history.push("/featured_causes"));
-      // .then(this.setState())
-      .then(this.setState({ now: true }))
-
-      .then(console.log("Alpha"));
+      .then(this.setState({ now: true }));
   };
 
   isAuthenticated() {
@@ -88,7 +87,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log("Rendered Again", this.state);
     var isAlreadyAuthenticated = this.isAuthenticated();
     return (
       <div>

@@ -2,12 +2,7 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { Search, Grid, Header, Segment } from "semantic-ui-react";
 
-const source = _.times(5, () => ({
-  // title: faker.company.companyName(),
-  // description: faker.company.catchPhrase(),
-  // image: faker.internet.avatar(),
-  // price: faker.finance.amount(0, 100, 2, "$")
-}));
+const source = _.times(5, () => ({}));
 
 export default class SearchBar extends Component {
   state = {
@@ -26,7 +21,6 @@ export default class SearchBar extends Component {
 
   handleResultSelect = (e, { result }) =>
     this.setState({ value: result.species });
-  // this.setState({ value: result.title });
 
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value });
@@ -46,14 +40,6 @@ export default class SearchBar extends Component {
 
   render() {
     let { isLoading, value, results } = this.state;
-    // var obj = JSON.parse(results);
-    // console.log("aaaaa", obj);
-
-    // obj.title = obj.species;
-    // delete obj.species;
-
-    // results = JSON.stringify([obj]);
-    // console.log("state of search", this.state);
 
     return (
       <Search

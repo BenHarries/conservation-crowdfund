@@ -117,7 +117,7 @@ describe("Test a Specific Feature Info GET (Content/Response Status)", () => {
   });
 });
 
-// describe("Test a Specific Feature Info GET (Content/Response Status)", () => {
+// describe("Test a Specific Feature Info POST (Content/Response Status)", () => {
 //   test("Response should have Content Type of application/json", async () => {
 //     const data = {
 //       id: 2,
