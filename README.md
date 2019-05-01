@@ -49,7 +49,18 @@ After logging in with either the user or admin credentials there are 3 pages ava
 - 'Admin'
   - This is an authenticated page for admins only that allows you to add causes/user and get specific info on causes/users
 
-The Conservation Causes API uses the data from the [IUCN red list API](https://apiv3.iucnredlist.org/api/v3/docs).
+The Conservation Causes API uses the data from the [IUCN red list of endangered species API](https://apiv3.iucnredlist.org/api/v3/docs). This represents itself as the _RED TEAR DROP SHAPES_ with the info in them about how endangered the species (from its scientific name) is.
+
+![_VU_lnerable to extinction
+](https://i.ibb.co/LtF6cJd/Screenshot-2019-05-01-at-17-49-01.png) = *Vu*lnerable to extinction
+![_VU_lnerable to extinction
+](https://i.ibb.co/w0gmybH/Screenshot-2019-05-01-at-17-48-54.png) = Endangered
+![_VU_lnerable to extinction
+](https://i.ibb.co/KWMtSF8/Screenshot-2019-05-01-at-17-48-50.png) = Least concern
+
+Explanatory Video
+![_VU_lnerable to extinction
+](images/ezgif.com-video-to-gif.gif)
 
 The server is stored in the files `app.js`, `featured_causes.js` and `users.js` and started using as above and runs on the local machine on `PORT 3001`.
 
@@ -152,5 +163,3 @@ all OK responses sent back with content-type `'application-json'`
   }
 ]
 ```
-
-Bit more of aj's
