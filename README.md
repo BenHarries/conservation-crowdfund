@@ -3,9 +3,14 @@
 1. Condervation_causes API
    Written in react.js and node.js
 
+- 0.[Website Documentattion (how to use website)](#How-to-Use-App)
+
+- 1.0. [API documentation]()
 - 1.1. [Open Endpoints](##-Open-Endpoints)
 - 1.2. [Endpoints that require Authentication](##Endpoints-that-require-Authentication)
 - 1.3. [Example JSON formatted response:](##Example-JSON-formatted-response:)
+- [Optional Extenstions 1: Cloud Deployment](###-Extension-1)
+- [Optional Extenstions 2: 3rd party API integration](###-Extension-2)
 
 # Conservation Causes API
 
@@ -17,7 +22,15 @@ once in root folder (`cd react-backend`)
 
 `npm start`
 
-will run server _and_ client side
+will run server _and_ client side (con-web)
+
+To end up with this
+
+- Explanatory Video
+  ![_VU_lnerable to extinction
+](images/ezgif.com-video-to-gif.gif)
+
+(IF ON WINDOWS! -> I have been able to run on someone elses mac but have had difficulty on a windows computer - if npm start fails on windows use the heroku link below to get a feel for the app)
 
 # How to test
 
@@ -29,10 +42,11 @@ will run server _and_ client side
 
 `npm run test`
 
-(IF ON WINDOWS! I have been able to run on someone elses mac but have had difficulty on a windows computer - if npm start fails on windows use the heroku link below to get a feel for the app)
+### Extension 1
 
 also running on _Heroku_ on https://ancient-stream-57707.herokuapp.com/ (Heroku dissalowed me to add any more changes as I had exceeded my free trial - so there is a few bugs still left in however most functionality remains, just click close on the errors if they pop up)
 
+Heroku demo
 ![_VU_lnerable to extinction
 ](images/demo_heroku.gif)
 
@@ -57,6 +71,8 @@ After logging in with either the user or admin credentials there are 3 pages ava
 - 'Admin'
   - This is an authenticated page for admins only that allows you to add causes/user and get specific info on causes/users
 
+### Extension 2
+
 The Conservation Causes API uses the data from the [IUCN red list of endangered species API](https://apiv3.iucnredlist.org/api/v3/docs). This represents itself as the _RED TEAR DROP SHAPES_ with the info in them about how endangered the species (from its scientific name) is.
 
 ![_VU_lnerable to extinction
@@ -65,10 +81,6 @@ The Conservation Causes API uses the data from the [IUCN red list of endangered 
 ](https://i.ibb.co/w0gmybH/Screenshot-2019-05-01-at-17-48-54.png) = Endangered
 ![_VU_lnerable to extinction
 ](https://i.ibb.co/KWMtSF8/Screenshot-2019-05-01-at-17-48-50.png) = Least concern
-
-Explanatory Video
-![_VU_lnerable to extinction
-](images/ezgif.com-video-to-gif.gif)
 
 The server is stored in the files `app.js`, `featured_causes.js` and `users.js` and started using as above and runs on the local machine on `PORT 3001`.
 
