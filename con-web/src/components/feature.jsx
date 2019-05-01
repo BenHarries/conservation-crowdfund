@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Image, Card, Icon, Button, Header } from "semantic-ui-react";
 import "./feature.css";
 
-const API1 = "http://apiv3.iucnredlist.org/api/v3/species/";
+const API1 = "https://apiv3.iucnredlist.org/api/v3/species/";
 const API2 =
   "?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
 
