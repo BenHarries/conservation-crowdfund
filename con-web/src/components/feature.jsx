@@ -31,7 +31,7 @@ class Feature extends Component {
     const API = API1.concat(split_name[0], "%20", split_name[1], API2);
     console.log("THis is the API of dreams", API);
 
-    fetch("http://localhost:3001" + API)
+    fetch(API)
       .then(result => {
         if (result.ok) {
           return result.json();
