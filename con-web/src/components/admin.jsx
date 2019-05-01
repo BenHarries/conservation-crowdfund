@@ -26,11 +26,8 @@ class Admin extends Component {
         }
       })
       .then(user => this.setState({ user: user }));
-<<<<<<< HEAD
 
     console.log(this.state);
-=======
->>>>>>> d29e2f1675e53339665f40e924f16ba13bd6716f
   };
 
   handleFeatureSubmit = event => {
@@ -47,11 +44,8 @@ class Admin extends Component {
         }
       })
       .then(desired_feature => this.setState({ desired_feature }));
-<<<<<<< HEAD
 
     console.log("STATE OF STATE", this.state);
-=======
->>>>>>> d29e2f1675e53339665f40e924f16ba13bd6716f
   };
   componentDidMount() {
     fetch("http://localhost:3001/featured_causes")

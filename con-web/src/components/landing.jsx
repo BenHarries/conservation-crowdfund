@@ -26,11 +26,8 @@ class MyCauses extends Component {
         }
       })
       .then(user => this.setState({ user: user }));
-<<<<<<< HEAD
 
     console.log(this.state);
-=======
->>>>>>> d29e2f1675e53339665f40e924f16ba13bd6716f
   };
   componentDidMount() {
     fetch("http://localhost:3001/users")
