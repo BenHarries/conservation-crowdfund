@@ -29,6 +29,8 @@ will run server _and_ client side
 
 `npm run test`
 
+(IF ON WINDOWS! I have been able to run on someone elses mac but have had difficulty on a windows computer - if npm start fails on windows use the heroku link below to get a feel for the app)
+
 also running on _Heroku_ on https://ancient-stream-57707.herokuapp.com/ (Heroku dissalowed me to add any more changes as I had exceeded my free trial - so there is a few bugs still left in however most functionality remains, just click close on the errors if they pop up)
 
 ![_VU_lnerable to extinction
