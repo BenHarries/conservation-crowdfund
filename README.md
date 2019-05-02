@@ -16,13 +16,13 @@
 
 # How to Run
 
-once in root folder (`cd react-backend`)
+Once in root folder (`cd react-backend`)
 
-`npm install` (this does a post intall on react subfolder dependencies)
+`npm install` (This does a post intall on react subfolder dependencies so may take slightly long)
 
 `npm start`
 
-will run server _and_ client side (con-web)
+(This will run server _and_ client side (con-web) on port 3001 and 3000 respectively)
 
 To end up with this
 
@@ -44,7 +44,7 @@ To end up with this
 
 ### Extension 1
 
-also running on _Heroku_ on https://ancient-stream-57707.herokuapp.com/ (Heroku dissalowed me to add any more changes as I had exceeded my free trial - so there is a few bugs still left in however most functionality remains, just click close on the errors if they pop up)
+Also running on _Heroku_ on https://ancient-stream-57707.herokuapp.com/ (Heroku dissalowed me to add any more changes as I had exceeded my free trial - so there is a few bugs still left in however most functionality remains, just click close on the errors if they pop up)
 
 Heroku demo
 ![_VU_lnerable to extinction
@@ -96,18 +96,9 @@ Eslint tests are performed by the command `'npm run pretest'` & Jest Mocking tes
 
 Open endpoints require no Authentication.
 
-- [Login]() : `POST /users/login`
+## Entity 1: users
 
-  - `Success: HTTP 200`
-  - `Failure: HTTP 401 (Authentication Failed)`
-  - Handles Login POST Request. The body of the request contains the users username and password.
-  - Response is the users credentials including:
-    - id: |
-      username: |
-      causes: |
-      profile_pic: |
-      password: |
-      secret: | (this becomes their token)
+
 
 * [Get all users]() : `GET /users`
 
@@ -128,6 +119,8 @@ Open endpoints require no Authentication.
   - `Success: HTTP 200`
   - `Failure: HTTP 401 (error message: Incorrect authentication)`
   - Handles new user POST Request. The body of the request contains the username of the person who has just 'liked the cause'. It then appends this cause the the `causes` property of the correct user object using a `filter` method if there is no cause of its name in it already.
+  
+## Entity 2: Causes
 
 - [Get all causes]() : `GET /featured_causes`
 
@@ -151,24 +144,44 @@ Closed endpoints require a valid Token to be included in the body of the request
 
 Endpoints for viewing and manipulating the users and causes by the Authenticated User (username/password: admin) has permissions to:
 
-- [Post new cause]() : `POST /featured_causes`
 
-  - `Success: HTTP 200 (OK)`
-  - `Failure: HTTP 403 (Not Found)`
-  - Handles POST request for making a new cause. Takes the causes id, species name, scientific name and the token of the person who sent it.
-  - It then uses `unshift()` to add the new cause to the hard coded users
-
-- [Post new user]() : `POST /new_user`
+- [Login]() : `POST /users/login`
 
   - `Success: HTTP 200`
   - `Failure: HTTP 401 (Authentication Failed)`
+  - Handles Login POST Request. The body of the request contains the users username and password.
+  - Checks the username and password against locally stored users.
+  - If correct Response is the users credentials including:
+   - id: |
+      username: |
+      causes: |
+      profile_pic: |
+      password: |
+      secret: | (this becomes their token)
+      
+Once logged in and a token is aquired:
+      
+- [Post new user]() : `POST users/new_user`
+
+  - `Success: HTTP 200`
+  - `Failure: HTTP 403 (Forbidden error)`
   - Handles new user POST Request.
   - The body of the request contains the new users id, username and password. Also checks the authentication token of the User which is appended to the request.body with id `token`.
-  - If this matches the admin token then it uses `unshift()` to add the new cause to the hard coded users.
+  - If this matches the admin token then it uses `unshift()` to add the new user to the hard coded users.
 
-all OK responses sent back with content-type `'application-json'`
+All OK responses sent back with content-type `'application-json'` using res.json()
 
-(when server is restarted the users are set back to how they were before the user sent any post requests)
+(When server is restarted the user and causes credentials are set back to how they were before the user sent any post requests)
+
+- [Post new cause]() : `POST /featured_causes`
+
+  - `Success: HTTP 200 (OK)`
+  - `Failure: HTTP 403 (Forbidden error)`
+  - Handles POST request for making a new cause. Takes the causes id, species name, scientific name and the username & token of the person who sent it.
+  - Also checks the authentication token of the User which is appended to the request.body with id `token` and if so appends their username to the cause.
+  - It then uses `unshift()` to add the new cause to the hard coded `featured_causes`
+
+
 
 ## Example JSON formatted response:
 
