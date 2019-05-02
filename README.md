@@ -18,7 +18,7 @@
 
 # How to Run
 
-Once in root folder (`cd react-backend`)
+Once in root folder
 
 `npm update` (in case of any differences in npm version)
 
