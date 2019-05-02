@@ -34,7 +34,7 @@ To end up with this
   ![_VU_lnerable to extinction
 ](images/ezgif.com-video-to-gif.gif)
 
-(IF ON WINDOWS! -> I have been able to run on someone elses mac but have had difficulty on a windows computer - if npm start fails on windows use the heroku link below to get a feel for the app)
+(IF ON WINDOWS! -> I have been able to run on someone elses mac but have had difficulty on a windows computer - if npm start fails on windows use the heroku link below to get a feel for the app - sorry for the inconvenience - perhaps try cd-ing into conweb and npm update and then from root do npm start again)
 
 # How to test
 
