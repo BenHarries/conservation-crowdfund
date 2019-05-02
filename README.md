@@ -152,7 +152,6 @@ Open endpoints require no Authentication.
     "secret": "ksdjncaksjbciadcn",
     "password": "user"
   }
-  //and so on...
 ]
 ```
 
