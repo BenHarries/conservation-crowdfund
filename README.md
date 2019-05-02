@@ -1,3 +1,5 @@
+# Conservation Causes
+
 # Table of Contents
 
 1. Condervation_causes API
@@ -17,6 +19,8 @@
 # How to Run
 
 Once in root folder (`cd react-backend`)
+
+`npm update` (in case of any differences in npm version)
 
 `npm install` (This does a post intall on react subfolder dependencies so may take slightly long)
 
@@ -98,92 +102,99 @@ Open endpoints require no Authentication.
 
 ## Entity 1: users
 
-
-
-* [Get all users]() : `GET /users`
+- [Get all users]() : `GET /users`
 
   - `Success: HTTP 200 (OK)`
   - `Failure: HTTP 404 (Not Found)`
+  - Parameters: N/A
   - Handles GET Request for a all users.
   - Returns all users.
+  - Example json resonse
 
-* [Get User]() : `GET /users/:username`
+```json
+[
+  {
+    "id": 1,
+    "username": "David",
+    "causes": ["Turtle"],
+    "profile_pic": "http://www.jakeblanchard.co.uk/Images/Archive/attenborough.jpg",
+    "password": "user",
+    "secret": "ksdjncaksjbciadcn"
+  },
+  {
+    "id": 2,
+    "username": "Steve",
+    "causes": ["Giant Panda"],
+    "profile_pic": "https://semantic-ui.com/images/avatar/large/joe.jpg",
+    "secret": "ksdjncaksjbciadcn",
+    "password": "user"
+  }
+  //and so on...
+]
+```
+
+- [Get User]() : `GET /users/:username`
 
   - `Success: HTTP 200 (OK)`
   - `Failure: HTTP 404 (Not Found)`
+  - Parameters: The parameter of the username of the certain user is in the url of the get request.
   - Handles GET Request for a specific user.
   - Returns users's details.
+  - Example json response with content-type `'application-json'` using res.json():
 
-* [Post new cause linked to user]() : `POST /users/update_cause`
+```json
+[
+  {
+    "id": 2,
+    "username": "Steve",
+    "causes": ["Giant Panda"],
+    "profile_pic": "https://semantic-ui.com/images/avatar/large/joe.jpg",
+    "secret": "ksdjncaksjbciadcn",
+    "password": "user"
+  }
+  //and so on...
+]
+```
+
+- [Post new cause linked to user]() : `POST /users/update_cause`
 
   - `Success: HTTP 200`
   - `Failure: HTTP 401 (error message: Incorrect authentication)`
-  - Handles new user POST Request. The body of the request contains the username of the person who has just 'liked the cause'. It then appends this cause the the `causes` property of the correct user object using a `filter` method if there is no cause of its name in it already.
-  
+  - Parameters: The body of the request contains the username of the person who has just 'liked the cause' and the cause being updated.
+  - Handles new user POST Request. It then appends this cause the the `causes` property of the correct user object using a `filter` method if there is no cause of its name in it already.
+  - No resonse body only status.
+
 ## Entity 2: Causes
 
 - [Get all causes]() : `GET /featured_causes`
 
   - `Success: HTTP 200 (OK)`
   - `Failure: HTTP 404 (Not Found)`
+  - Parameters: N/A
   - Handles GET Request for a all causes.
   - Returns all users.
+  - Example JSON formatted response with content-type `'application-json'` using res.json():
+
+```json
+[
+  {
+    "id": 6,
+    "species": "Asian Tiger",
+    "image": "https://previews.123rf.com/images/ewastudio/ewastudio1803/ewastudio180300105/98369124-tiger-in-forest-tiger-portrait.jpg",
+    "user_who_added": "Steve",
+    "scientific_name": "Panthera tigris"
+  } //and so on ...
+]
+```
 
 - [Get Cause]() : `GET /featured_causes/desired/:featured_cause`
 
   - `Success: HTTP 200 (OK)`
   - `Failure: HTTP 404 (Not Found)`
+  - Parameters: The parameter of the name of the cause is in the url of the get request.
   - Handles GET Request for a specific cause.
   - Returns cause's details.
-
-all OK responses sent back with content-type `'application-json'`
-
-## Endpoints that require Authentication
-
-Closed endpoints require a valid Token to be included in the body of the request with the key `token`. A Token can be acquired from the post request above which as part of its resonse has `res.token`: `token`.
-
-Endpoints for viewing and manipulating the users and causes by the Authenticated User (username/password: admin) has permissions to:
-
-
-- [Login]() : `POST /users/login`
-
-  - `Success: HTTP 200`
-  - `Failure: HTTP 401 (Authentication Failed)`
-  - Handles Login POST Request. The body of the request contains the users username and password.
-  - Checks the username and password against locally stored users.
-  - If correct Response is the users credentials including:
-   - id: |
-      username: |
-      causes: |
-      profile_pic: |
-      password: |
-      secret: | (this becomes their token)
-      
-Once logged in and a token is aquired:
-      
-- [Post new user]() : `POST users/new_user`
-
-  - `Success: HTTP 200`
-  - `Failure: HTTP 403 (Forbidden error)`
-  - Handles new user POST Request.
-  - The body of the request contains the new users id, username and password. Also checks the authentication token of the User which is appended to the request.body with id `token`.
-  - If this matches the admin token then it uses `unshift()` to add the new user to the hard coded users.
-
-All OK responses sent back with content-type `'application-json'` using res.json()
-
-(When server is restarted the user and causes credentials are set back to how they were before the user sent any post requests)
-
-- [Post new cause]() : `POST /featured_causes`
-
-  - `Success: HTTP 200 (OK)`
-  - `Failure: HTTP 403 (Forbidden error)`
-  - Handles POST request for making a new cause. Takes the causes id, species name, scientific name and the username & token of the person who sent it.
-  - Also checks the authentication token of the User which is appended to the request.body with id `token` and if so appends their username to the cause.
-  - It then uses `unshift()` to add the new cause to the hard coded `featured_causes`
-
-
-
-## Example JSON formatted response:
+  - ### Example JSON formatted response with content-type `'application-json'` using res.json():
 
 ```json
 [
@@ -196,3 +207,71 @@ All OK responses sent back with content-type `'application-json'` using res.json
   }
 ]
 ```
+
+all OK responses sent back with content-type `'application-json'`
+
+## Endpoints that require Authentication
+
+Closed endpoints require a valid Token to be included in the body of the request with the key `token`. A Token can be acquired from the post request above which as part of its resonse has `res.token`: `token`.
+
+Endpoints for viewing and manipulating the users and causes by the Authenticated User (username/password: admin) has permissions to:
+
+- [Login]() : `POST /users/login`
+
+  - `Success: HTTP 200`
+  - `Failure: HTTP 401 (Authentication Failed)`
+  - Parameters: The body of the request contains the users username and password.
+  - Handles Login POST Request.
+  - Checks the username and password against locally stored users.
+
+  - ### Example JSON formatted response with content-type `'application-json'` using res.json():
+
+```json
+[
+  {
+    "id": 2,
+    "username": "Steve",
+    "causes": ["Giant Panda"],
+    "profile_pic": "https://semantic-ui.com/images/avatar/large/joe.jpg",
+    "secret": "ksdjncaksjbciadcn",
+    "password": "user"
+  }
+]
+```
+
+Once logged in and a token is aquired:
+
+- [Post new user]() : `POST users/new_user`
+
+  - `Success: HTTP 200`
+  - `Failure: HTTP 403 (Forbidden error)`
+  - Parameters: The body of the request contains the new users id, username and password.
+  - Handles new user POST Request.
+  - Also checks the authentication token of the User which is appended to the request.body with id `token`.
+  - If this matches the admin token then it uses `unshift()` to add the new user to the hard coded users.
+  - only a response status given back
+  - Example JSON formatted response with content-type `'application-json'` using res.json():
+
+```json
+[
+  {
+    "id": 6,
+    "species": "Asian Tiger",
+    "image": "https://previews.123rf.com/images/ewastudio/ewastudio1803/ewastudio180300105/98369124-tiger-in-forest-tiger-portrait.jpg",
+    "user_who_added": "Steve",
+    "scientific_name": "Panthera tigris"
+  }
+]
+```
+
+- [Post new cause]() : `POST /featured_causes`
+
+  - `Success: HTTP 200 (OK)`
+  - `Failure: HTTP 403 (Forbidden error)`
+  - Parameters: Takes the causes id, species name, scientific name and the username & token of the person who sent it.
+  - Handles POST request for making a new cause.
+  - Also checks the authentication token of the User which is appended to the request.body with id `token` and if so appends their username to the cause.
+  - It then uses `unshift()` to add the new cause to the hard coded `featured_causes`
+  - No response given just the res.status
+
+(When server is restarted the user and causes credentials are set back to how they were before the user sent any post requests)
